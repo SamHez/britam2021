@@ -1,0 +1,1504 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.thirdparty.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">New thirdparty sticker</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="stickerCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Add Thirdparty Details</h5> 
+			<div class="row"> 
+					<div class="panel panel-white"> 
+						<div class="panel-body">
+							  
+							  <div> 
+			
+			<fieldset>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Insurance Category</label>
+                  <div class="col-sm-10">
+					<div class="clip-radio radio-primary">
+										<input type="radio" id="3rd Party" name="motor_category" ng-model="data.motor_category" value="3rd Party">
+										<label for="3rd Party">
+											3rd Party
+										</label>
+										
+										<input type="radio" id="New Import" name="motor_category" ng-model="data.motor_category" value="New Import">
+										<label for="New Import">
+											New Import
+										</label>
+										
+										<input type="radio" id="Transit" name="motor_category" ng-model="data.motor_category" value="Transit">
+										<label for="Transit">
+											Motor Transit
+										</label>
+										
+										<input type="radio" id="Comprehensive" name="motor_category" ng-model="data.motor_category" value="Comprehensive">
+										<label for="Comprehensive">
+											Comprehensive
+										</label>
+										<input type="radio" id="Enhanced" name="motor_category" ng-model="data.motor_category" value="Enhanced">
+										<label for="Enhanced">
+											Enhanced
+										</label>
+					</div>
+                     <!-- <div class="radio-inline c-radio"> -->
+                        <!-- <label> -->
+                           <!-- <input id="inlineradio3" type="radio" name="motor_category" ng-model="data.motor_category" value="3rd Party" /> -->
+                           <!-- <span class="fa fa-circle"></span>3rd Party</label> -->
+                     <!-- </div> -->
+                     <!-- <div class="radio-inline c-radio"> -->
+                        <!-- <label> -->
+                           <!-- <input id="inlineradio3" type="radio" name="motor_category" ng-model="data.motor_category" value="Comprehensive" /> -->
+                           <!-- <span class="fa fa-circle"></span>Comprehensive</label> -->
+                     <!-- </div> -->
+					 <!-- <div class="radio-inline c-radio"> -->
+                        <!-- <label> -->
+                           <!-- <input id="inlineradio3" type="radio" name="motor_category" ng-model="data.motor_category" value="Enhanced" /> -->
+                           <!-- <span class="fa fa-circle"></span>Enhanced</label> -->
+                     <!-- </div> -->
+                  </div>
+               </div>
+            </fieldset>
+			 
+			
+	<div ng-show="data.motor_category=='3rd Party'">
+			
+         <form name="thirdpartyForm" class="form-horizontal">
+			
+			<fieldset>
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Select Currency</label>
+                  <div class="col-sm-10">
+                     <select class="form-control" ng-model="data.currency">
+					 <option>--Select--</option>
+					 <option>UGX</option>
+					 <option>USD</option>
+					 <option>KSH</option>
+					 <option>TSH</option>
+					 <option>RF</option>
+					 <option>FBu</option> 
+					 </select>
+                  </div>
+               </div>
+			    
+			 <h6><u>Motor details</u></h6>
+			 
+			 <button class="btn btn-primary" ng-click="addNewChoice()">Add +</button>
+			 <button class="btn btn-danger" ng-click="removeChoice();total_p=0" >Remove -</button><br/>
+			 <table class="table table-bordered">
+			 <tr>
+				<th></th>
+				<th></th> 
+			 </tr>
+			 <tbody> 
+			 <tr ng-repeat="motor_detail in motor_details track by $index">
+				<td width="50%" ng-init="$parent.total_p = (($index + 1));">sticker #{{$index + 1}} 
+				<br/><label>No plate: <span style="color:red">*</span></label><input type="text" class="form-control"  ng-model="motor_detail.vehicle_plate_no" required/>
+				<br/><label>Category: <span style="color:red">*</span></label> <select class="form-control"  ng-model="motor_detail.category" required>
+					 <option>--Select--</option> 
+					 <option>Private</option>
+					 <option>Commercial</option>
+					 <option>Buses</option>  
+					 <option>Motorcycles</option>  
+					 <option>Ambulances</option>  
+					 <option>Bullion Vans/ Fire fighting</option>  
+					 <option>Farm vehicles</option>  
+					 <option>Construction Equipments</option>  
+					 <option>Oil,gas,petro tankers</option>   
+					 <option>Hauliers</option>  
+					 <option>Motor trade</option>					 
+					</select><br/>
+					Class: <span style="color:red">*</span>
+					<select class="form-control" ng-show="motor_detail.category=='Commercial'" ng-model="motor_detail.class" required>
+					 <option>--Select--</option>
+					 <option>Class I:Own Use</option> 
+					 <option>Class II:public use and carrying good for hire</option>
+					 <option>Class III: Private hire, self drive,employed driver</option>
+					 <option>Class IV: PSV</option>
+					</select>
+					<select class="form-control" ng-show="motor_detail.category=='Private'" ng-model="motor_detail.class" required>
+					 <option>--Select--</option>
+					 <option>Class I: own/family</option> 
+					 <option>Class II: company/employed driver</option>
+					</select>
+				<br/><label>Gross Weight:</label> <input type="text" class="form-control" name="value" ng-model="motor_detail.gross_weight"/>
+				<br/><label>Vehicle Use: <span style="color:red">*</span></label>  
+					<select class="form-control" ng-model="motor_detail.use" required>
+					 <option>--Select--</option>
+					 <option ng-show="motor_detail.category=='Buses' || motor_detail.category=='Ambulances' || motor_detail.category=='Bullion Vans/ Fire fighting'">Public</option> 
+					 <option ng-show="motor_detail.category=='Buses' || motor_detail.category=='Ambulances' || motor_detail.category=='Bullion Vans/ Fire fighting'" value="Private">Private(PMO)</option> 
+					 <option ng-show="motor_detail.category=='Farm vehicles'">On premises</option> 
+					 <option ng-show="motor_detail.category=='Farm vehicles'">Off premises</option>
+					 <option ng-show="motor_detail.category=='Construction Equipments'">light and small</option>
+					 <option ng-show="motor_detail.category=='Construction Equipments'">heavy and large</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="single truck">single truck of sub-trailer</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="super-imposed">super-imposed tanker and sub-trailer</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="Water">Water, milk, cesspool emptier tankers</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Single truck (semi-trailer) for own goods</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Single truck (semi-trailer) for public goods</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Super-imposed trailer own goods</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">1st pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">2nd pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">3rd pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">>3 pairs of number plates</option>
+					 <option>N/A</option>
+					</select>
+					<br/>					
+					<select class="form-control" ng-show="motor_detail.use=='On premises' || motor_detail.use=='Off premises'" ng-model="motor_detail.premises" required>
+					 <option>--Select--</option>
+					 <option>Tractor</option> 
+					 <option>Trailer</option>
+					</select>
+					<br/>					
+					<input type="text" class="form-control" ng-show="motor_detail.use=='>3 pairs of number plates'" placeholder="No of pairs" ng-model="motor_detail.motortrade_pair" ng-change="motor_detail.basic_premium2=(((motor_detail.motortrade_pair)-3)*26085)+39130"/> 
+				  
+				 </td>   
+				<td width="50%">
+				<br/><label>Seating capacity <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_no_seats" required />
+				<br/><label>Motor Power(in CC) <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_cc" required/>
+				<br/>
+				<label>Chassis No <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_chasis_no" required/>
+				<br/><label>Motor Make</label>
+					<select class="form-control"  ng-model="motor_detail.vehicle_make">
+					 <option value="">-select-</option>
+					 <option value="Toyota">Toyota</option>
+					 <option value="Mercedez Benz">Mercedez Benz</option>
+					 <option value="Nissan">Nissan</option>
+					 <option value="GMC">GMC</option>
+					 <option value="BMW">BMW</option>
+					 <option value="Isuzu">Isuzu</option>
+					 <option value="Others">Others</option>
+					 </select>
+				 <br/> 
+				<label>Basic Premium</label>
+				<!-- <input ng-show="motor_detail.type=='Other'" type="text" class="form-control" ng-model="motor_detail.other" ng-change="motor_detail.basic_premium2=motor_detail.other"/> --> 
+				
+				<!-- private Class I: own/family --> 
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class I: own/family' && motor_detail.vehicle_no_seats <= 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=21910" />21,910</span>
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class I: own/family' && motor_detail.vehicle_no_seats > 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((motor_detail.vehicle_no_seats-5)*1000)+21910" />{{motor_detail.basic_premium2 | number}}</span>
+				
+				<!-- private Class II: company/employed driver --> 
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class II: company/employed driver' && motor_detail.vehicle_no_seats <= 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class II: company/employed driver' && motor_detail.vehicle_no_seats > 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((motor_detail.vehicle_no_seats-5)*1000)+27390" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				<!-- commercial Class I: own use --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight <= 1500"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=18260" />18,260</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 1501 && motor_detail.gross_weight <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 3001 && motor_detail.gross_weight <= 6000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=40780" />40,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 6001 && motor_detail.gross_weight <= 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=54780" />54,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight > 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.gross_weight-10000)/1000)*2390)+54780" />{{motor_detail.basic_premium2 | number}}</span>
+				
+				<!-- commercial Class II: public use and carrying good for hire --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight <= 1500"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 1501 && motor_detail.gross_weight <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=40780" />40,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 3001 && motor_detail.gross_weight <= 6000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=61625" />61,625</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 6001 && motor_detail.gross_weight <= 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=82170" />82,170</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight > 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.gross_weight-10000)/1000)*4565)+82170" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				<div ng-show="motor_detail.vehicle_no_seats < 21">
+				<!-- commercial Class III: Private hire, self drive,employed driver --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc <= 2000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+31950" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc >= 2001 && motor_detail.vehicle_cc <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+36520" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc > 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+46650" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				
+				<!-- commercial Class IV: PSV --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc <= 2000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+32605" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc >= 2001 && motor_detail.vehicle_cc <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+39130" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc > 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+45650" />{{motor_detail.basic_premium2 | number}}</span>
+				</div>	 
+				
+				<!-- Buses Private(PMO) --> 
+				<span ng-if="motor_detail.use=='Private' && motor_detail.category=='Buses'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+45000" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.use=='Public' && motor_detail.category=='Buses'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*5220)+50000" />{{motor_detail.basic_premium2 | number}}</span>
+				 
+				<!-- Motorcycles/bicycles  -->
+				<span ng-if="motor_detail.vehicle_cc <=50 && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=3260" />3,260</span>
+				<span ng-if="motor_detail.vehicle_cc >=51  && motor_detail.vehicle_cc <=150  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=3915" />3,915</span>
+				<span ng-if="motor_detail.vehicle_cc >=151  && motor_detail.vehicle_cc <=300  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=6520" />6,520</span>
+				<span ng-if="motor_detail.vehicle_cc >=301  && motor_detail.vehicle_cc <=500  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=9785" />9,785</span>
+				<span ng-if="motor_detail.vehicle_cc >500  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13045" />13,045</span>
+				 
+				<!-- Ambulances  -->
+				<span ng-if="motor_detail.category=='Ambulances'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13695" />13,695</span>
+				 
+				<!-- Bullion vans/fire fighting vehicles  -->
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Private' && motor_detail.vehicle_cc <=3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=52170" />52,170</span>
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Private' && motor_detail.vehicle_cc >3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Public'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=91300" />91,300</span>
+				  
+				<!-- Farm vehicles On premises/Off premises -->
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='On premises' && motor_detail.premises=='Tractor'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13695" />13,695</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='On premises' && motor_detail.premises=='Trailer'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=18260" />18,260</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='Off premises' && motor_detail.premises=='Tractor'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=22825" />22,825</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='Off premises' && motor_detail.premises=='Trailer'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=45650" />45,650</span>
+				   
+				<!-- Construction Equipment  -->
+				<span ng-if="motor_detail.category=='Construction Equipments' && motor_detail.use=='light and small'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=26085" />26,085</span>
+				<span ng-if="motor_detail.category=='Construction Equipments' && motor_detail.use=='heavy and large'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				    
+				  
+				<!-- Oil, gas, petrol tankers  -->
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='single truck'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*11735)+195640" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='super-imposed'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*32175)+130425" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='Water'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+78255" />{{motor_detail.basic_premium2 | number}}</span>
+				   
+				<!-- Hauliers  -->
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Single truck (semi-trailer) for own goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+78255" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Single truck (semi-trailer) for public goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+117385" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Super-imposed trailer own goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=158510" />158,510</span>
+				 
+				 
+				<!-- Motor trade  -->
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='1st pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='2nd pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=52170" />52,170</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='3rd pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=39130" />39,130</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='>3 pairs of number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.motortrade_pair)-3)*26085)+39130" />{{motor_detail.basic_premium2 | number}}</span>
+				</fieldset>     
+			  </td>
+			 </tr>
+		 
+			<!-- {{data | json}} -->
+			 </tbody>
+			 <tfoot>
+				<td>Total valuation</td>
+				<td><strong>{{total_valuation | number}} {{data.currency}}</strong></td>
+			 </tfoot>
+			 </table>
+			 <br/>
+			 <!-- {{motor_details | json}} -->
+			 <button class="btn btn-primary" ng-click="getTotal();data.total_levy = ((0.5/(total_p+'00'))*total_valuation);">Generate Basic Premium</button>
+			     
+            </fieldset>
+			 
+			<!-- {{data | json}} -->
+			 <fieldset ng-controller="DatepickerDemoCtrl">
+			 <h6><u>Policy period</u></h6>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Start Date</label>
+                  <div class="col-sm-10 col-lg-4">
+				   <!-- <ng-datepicker format="DD-MM-YYYY" view-format="DD-MM-YYYY" ng-model="data.start_date"></ng-datepicker> -->
+				   <input type="text" class="form-control" ng-click="endOpen = !endOpen" datepicker-popup="fullDate" ng-model="data.start_date" is-open="endOpen" ng-init="endOpen = false" min-date="data.start_date" close-text="Close" required />
+			
+				   <span ng-show="data.start_date < today" style="color:red">Date must be current date and above</span>
+				   <!-- {{today}} -->
+                    
+                  </div>
+               </div>
+			   <!-- <div class="form-group"> -->
+                  <!-- <label class="col-sm-2 control-label">End Date</label> -->
+                  <!-- <div class="col-sm-10"> -->
+				   <!-- <ng-datepicker format="DD-MM-YYYY" view-format="DD-MM-YYYY" ng-model="data.end_date"></ng-datepicker> -->
+                     
+                  <!-- </div> -->
+               <!-- </div> -->
+            </fieldset>
+			
+			
+			 
+			
+            <fieldset>
+			 <h6><u>Client details</u></h6>
+			 
+			 <fieldset>
+               <div class="form-group">
+                  <!-- <label class="col-sm-3 control-label">Select Client</label> -->
+                  <div class="col-sm-12">
+						<div class="clip-radio radio-primary">
+										<input type="radio" id="new" name="n_client" ng-model="data.n_client" value="new">
+										<label for="new">
+											New Client
+										</label>
+										<input type="radio" id="old" name="n_client" ng-model="data.n_client" value="old">
+										<label for="old">
+											Existing Client
+										</label> 
+						</div>	 
+                  </div>
+               </div>
+            </fieldset>
+			
+				   <div class="form-group" ng-show="data.n_client=='old'">
+					  <label class="col-sm-2 control-label">Select Client</label>
+					  <div class="col-sm-10">
+						 <select type="text" class="form-control" ng-model="data.client" ng-options="c.name for c in clients track by c.client_id">
+						 <option>--Select--</option>
+						 </select>
+					  </div>
+				   </div>
+				   
+				<div ng-show="data.n_client=='new'">
+				   
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Client Name</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_name" name="client_name"/> 
+                  </div>
+				  </div>
+				  
+				   <div class="form-group" ng-controller="DatepickerDemoCtrl">
+					  <label class="col-sm-2 control-label">Date of birth</label>
+					  <div class="col-sm-10 col-lg-4">
+					  <input type="text" class="form-control" ng-click="endOpen = !endOpen" name="dob" datepicker-popup="fullDate" ng-model="data.dob" min-date="dt" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+			
+					  </div>
+				   </div> 
+				  
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Gender</label>
+                  <div class="col-sm-10">
+						<div class="clip-radio radio-primary">
+										<input type="radio" id="Male" name="gender" ng-model="data.gender" value="Male">
+										<label for="Male">
+											Male
+										</label>
+										<input type="radio" id="Female" name="gender" ng-model="data.Female" value="Female">
+										<label for="Female">
+											Female
+										</label> 
+						</div> 
+                  </div>
+               </div>
+				  
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Email Address</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_email" name="client_email"/>
+					  
+                  </div>
+				  </div>
+			   
+			   <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Telephone <span style="color:red">*</span></label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_telephone" name="client_telephone" ng-pattern="/^\d+$/" required />
+					 <span  ng-show="client_telephone.$error.pattern" style="color:red">Not a valid number!</span>  
+                  </div>
+               </div>
+			   
+			   <div class="form-group">
+                  <label class="col-sm-2 control-label">Address</label>
+                  <div class="col-sm-10">
+                     <textarea rows="10" class="form-control"  ng-model="data.client_address" name="client_address"> 
+					 </textarea>
+                  </div>
+               </div>
+				   
+				</div>
+			   
+            </fieldset>
+            
+             <h4>3rd Party Insurance Costs</h4>
+            <fieldset>
+			 <span style="color:red;">Basic premium:</span> {{total_valuation | number:0}} {{data.currency}}<br/>
+			  
+              <span style="color:red;">Training Levy 0.5 % :</span> {{data.total_levy | number:0}} {{data.currency}}<br/>
+            
+              <span style="color:red;">Sticker Fees :</span> {{(total_p*6000) | number:0}} {{data.currency}}<br/>
+            
+              <span style="color:red;">Stamp Duty :</span> {{(total_p*35000) | number:0}} {{data.currency}}<br/>
+             
+              <span style="color:red;">VAT 18%:</span> {{((total_valuation*1)+(data.total_levy*1)+(total_p*6000))*0.18 | number:0}} {{data.currency}}<br/>
+            
+              <span style="color:red;">Total Premium :</span> {{((total_valuation*1)+(data.total_levy*1)+(total_p*6000)+(total_p*35000)+(((total_valuation*1)+(data.total_levy*1)+(total_p*6000))*0.18)+(2000)) | number:0}} {{data.currency}}
+            </fieldset> 
+              
+			   
+			   <div class="form-group">
+                  <label class="col-sm-2 control-label">Submit for invoice</label>
+                  <div class="col-sm-10">
+                     <button class="btn btn-primary" ng-click="getInvoice(data)">Process Thirdparty</button>
+                  </div>
+               </div>
+            </fieldset>
+			
+         </form>
+			</div>
+			 
+		<div ng-show="data.motor_category=='New Import'">
+			
+         <form name="thirdpartyForm" class="form-horizontal">
+			
+			<fieldset>
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Select Currency</label>
+                  <div class="col-sm-10">
+                     <select class="form-control" ng-model="data.currency">
+					 <option>--Select--</option>
+					 <option>UGX</option>
+					 <option>USD</option>
+					 <option>KSH</option>
+					 <option>TSH</option>
+					 <option>RF</option>
+					 <option>FBu</option> 
+					 </select>
+                  </div>
+               </div>
+			    
+			 <h6><u>Motor details</u></h6>
+			 
+			 <button class="btn btn-primary" ng-click="addNewChoice()">Add +</button>
+			 <button class="btn btn-danger" ng-click="removeChoice();total_p=0" >Remove -</button><br/>
+			 <table class="table table-bordered">
+			 <tr>
+				<th></th>
+				<th></th> 
+			 </tr>
+			 <tbody> 
+			 <tr ng-repeat="motor_detail in motor_details track by $index">
+				<td width="50%" ng-init="$parent.total_p = (($index + 1));">sticker #{{$index + 1}} 
+				<br/><label>No plate: <span style="color:red">*</span></label><input type="text" class="form-control"  ng-model="motor_detail.vehicle_plate_no" required/>
+				<br/><label>Category: <span style="color:red">*</span></label> <select class="form-control"  ng-model="motor_detail.category" required>
+					 <option>--Select--</option> 
+					 <option>Private</option>
+					 <option>Commercial</option>
+					 <option>Buses</option>  
+					 <option>Motorcycles</option>  
+					 <option>Ambulances</option>  
+					 <option>Bullion Vans/ Fire fighting</option>  
+					 <option>Farm vehicles</option>  
+					 <option>Construction Equipments</option>  
+					 <option>Oil,gas,petro tankers</option>   
+					 <option>Hauliers</option>  
+					 <option>Motor trade</option>					 
+					</select><br/>
+					Class: <span style="color:red">*</span>
+					<select class="form-control" ng-show="motor_detail.category=='Commercial'" ng-model="motor_detail.class" required>
+					 <option>--Select--</option>
+					 <option>Class I:Own Use</option> 
+					 <option>Class II:public use and carrying good for hire</option>
+					 <option>Class III: Private hire, self drive,employed driver</option>
+					 <option>Class IV: PSV</option>
+					</select>
+					<select class="form-control" ng-show="motor_detail.category=='Private'" ng-model="motor_detail.class" required>
+					 <option>--Select--</option>
+					 <option>Class I: own/family</option> 
+					 <option>Class II: company/employed driver</option>
+					</select>
+				<br/><label>Gross Weight:</label> <input type="text" class="form-control" name="value" ng-model="motor_detail.gross_weight"/>
+				<br/><label>Vehicle Use: <span style="color:red">*</span></label>  
+					<select class="form-control" ng-model="motor_detail.use" required>
+					 <option>--Select--</option>
+					 <option ng-show="motor_detail.category=='Buses' || motor_detail.category=='Ambulances' || motor_detail.category=='Bullion Vans/ Fire fighting'">Public</option> 
+					 <option ng-show="motor_detail.category=='Buses' || motor_detail.category=='Ambulances' || motor_detail.category=='Bullion Vans/ Fire fighting'" value="Private">Private(PMO)</option> 
+					 <option ng-show="motor_detail.category=='Farm vehicles'">On premises</option> 
+					 <option ng-show="motor_detail.category=='Farm vehicles'">Off premises</option>
+					 <option ng-show="motor_detail.category=='Construction Equipments'">light and small</option>
+					 <option ng-show="motor_detail.category=='Construction Equipments'">heavy and large</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="single truck">single truck of sub-trailer</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="super-imposed">super-imposed tanker and sub-trailer</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="Water">Water, milk, cesspool emptier tankers</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Single truck (semi-trailer) for own goods</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Single truck (semi-trailer) for public goods</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Super-imposed trailer own goods</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">1st pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">2nd pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">3rd pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">>3 pairs of number plates</option>
+					 <option>N/A</option>
+					</select>
+					<br/>					
+					<select class="form-control" ng-show="motor_detail.use=='On premises' || motor_detail.use=='Off premises'" ng-model="motor_detail.premises" required>
+					 <option>--Select--</option>
+					 <option>Tractor</option> 
+					 <option>Trailer</option>
+					</select>
+					<br/>					
+					<input type="text" class="form-control" ng-show="motor_detail.use=='>3 pairs of number plates'" placeholder="No of pairs" ng-model="motor_detail.motortrade_pair" ng-change="motor_detail.basic_premium2=(((motor_detail.motortrade_pair)-3)*26085)+39130"/> 
+				  
+				 </td>   
+				<td width="50%">
+				<br/><label>Seating capacity <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_no_seats" required />
+				<br/><label>Motor Power(in CC) <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_cc" required/>
+				<br/>
+				<label>Chassis No <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_chasis_no" required/>
+				<br/><label>Motor Make</label>
+					<select class="form-control"  ng-model="motor_detail.vehicle_make">
+					 <option value="">-select-</option>
+					 <option value="Toyota">Toyota</option>
+					 <option value="Mercedez Benz">Mercedez Benz</option>
+					 <option value="Nissan">Nissan</option>
+					 <option value="GMC">GMC</option>
+					 <option value="BMW">BMW</option>
+					 <option value="Isuzu">Isuzu</option>
+					 <option value="Others">Others</option>
+					 </select>
+				 <br/> 
+				<label>Basic Premium</label>
+				<!-- <input ng-show="motor_detail.type=='Other'" type="text" class="form-control" ng-model="motor_detail.other" ng-change="motor_detail.basic_premium2=motor_detail.other"/> --> 
+				
+				<!-- private Class I: own/family --> 
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class I: own/family' && motor_detail.vehicle_no_seats <= 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=21910" />21,910</span>
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class I: own/family' && motor_detail.vehicle_no_seats > 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((motor_detail.vehicle_no_seats-5)*1000)+21910" />{{motor_detail.basic_premium2 | number}}</span>
+				
+				<!-- private Class II: company/employed driver --> 
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class II: company/employed driver' && motor_detail.vehicle_no_seats <= 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class II: company/employed driver' && motor_detail.vehicle_no_seats > 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((motor_detail.vehicle_no_seats-5)*1000)+27390" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				<!-- commercial Class I: own use --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight <= 1500"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=18260" />18,260</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 1501 && motor_detail.gross_weight <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 3001 && motor_detail.gross_weight <= 6000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=40780" />40,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 6001 && motor_detail.gross_weight <= 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=54780" />54,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight > 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.gross_weight-10000)/1000)*2390)+54780" />{{motor_detail.basic_premium2 | number}}</span>
+				
+				<!-- commercial Class II: public use and carrying good for hire --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight <= 1500"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 1501 && motor_detail.gross_weight <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=40780" />40,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 3001 && motor_detail.gross_weight <= 6000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=61625" />61,625</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 6001 && motor_detail.gross_weight <= 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=82170" />82,170</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight > 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.gross_weight-10000)/1000)*4565)+82170" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				<div ng-show="motor_detail.vehicle_no_seats < 21">
+				<!-- commercial Class III: Private hire, self drive,employed driver --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc <= 2000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+31950" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc >= 2001 && motor_detail.vehicle_cc <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+36520" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc > 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+46650" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				
+				<!-- commercial Class IV: PSV --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc <= 2000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+32605" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc >= 2001 && motor_detail.vehicle_cc <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+39130" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc > 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+45650" />{{motor_detail.basic_premium2 | number}}</span>
+				</div>	 
+				
+				<!-- Buses Private(PMO) --> 
+				<span ng-if="motor_detail.use=='Private' && motor_detail.category=='Buses'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+45000" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.use=='Public' && motor_detail.category=='Buses'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*5220)+50000" />{{motor_detail.basic_premium2 | number}}</span>
+				 
+				<!-- Motorcycles/bicycles  -->
+				<span ng-if="motor_detail.vehicle_cc <=50 && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=3260" />3,260</span>
+				<span ng-if="motor_detail.vehicle_cc >=51  && motor_detail.vehicle_cc <=150  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=3915" />3,915</span>
+				<span ng-if="motor_detail.vehicle_cc >=151  && motor_detail.vehicle_cc <=300  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=6520" />6,520</span>
+				<span ng-if="motor_detail.vehicle_cc >=301  && motor_detail.vehicle_cc <=500  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=9785" />9,785</span>
+				<span ng-if="motor_detail.vehicle_cc >500  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13045" />13,045</span>
+				 
+				<!-- Ambulances  -->
+				<span ng-if="motor_detail.category=='Ambulances'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13695" />13,695</span>
+				 
+				<!-- Bullion vans/fire fighting vehicles  -->
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Private' && motor_detail.vehicle_cc <=3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=52170" />52,170</span>
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Private' && motor_detail.vehicle_cc >3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Public'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=91300" />91,300</span>
+				  
+				<!-- Farm vehicles On premises/Off premises -->
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='On premises' && motor_detail.premises=='Tractor'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13695" />13,695</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='On premises' && motor_detail.premises=='Trailer'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=18260" />18,260</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='Off premises' && motor_detail.premises=='Tractor'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=22825" />22,825</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='Off premises' && motor_detail.premises=='Trailer'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=45650" />45,650</span>
+				   
+				<!-- Construction Equipment  -->
+				<span ng-if="motor_detail.category=='Construction Equipments' && motor_detail.use=='light and small'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=26085" />26,085</span>
+				<span ng-if="motor_detail.category=='Construction Equipments' && motor_detail.use=='heavy and large'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				    
+				  
+				<!-- Oil, gas, petrol tankers  -->
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='single truck'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*11735)+195640" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='super-imposed'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*32175)+130425" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='Water'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+78255" />{{motor_detail.basic_premium2 | number}}</span>
+				   
+				<!-- Hauliers  -->
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Single truck (semi-trailer) for own goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+78255" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Single truck (semi-trailer) for public goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+117385" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Super-imposed trailer own goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=158510" />158,510</span>
+				 
+				 
+				<!-- Motor trade  -->
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='1st pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='2nd pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=52170" />52,170</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='3rd pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=39130" />39,130</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='>3 pairs of number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.motortrade_pair)-3)*26085)+39130" />{{motor_detail.basic_premium2 | number}}</span>
+				</fieldset>     
+			  </td>
+			 </tr>
+		 
+			<!-- {{data | json}} -->
+			 </tbody>
+			 <tfoot>
+				<td>Total valuation</td>
+				<td><strong>{{total_valuation | number}} {{data.currency}}</strong></td>
+			 </tfoot>
+			 </table>
+			 <br/>
+			 <!-- {{motor_details | json}} -->
+			 <button class="btn btn-primary" ng-click="getTotal();data.total_levy = ((0.5/(total_p+'00'))*total_valuation);">Generate Basic Premium</button>
+			     
+            </fieldset>
+			 
+			<!-- {{data | json}} -->
+			 <fieldset ng-controller="DatepickerDemoCtrl">
+			 <h6><u>Policy period</u></h6>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Start Date</label>
+                  <div class="col-sm-10 col-lg-4">
+				   <!-- <ng-datepicker format="DD-MM-YYYY" view-format="DD-MM-YYYY" ng-model="data.start_date"></ng-datepicker> -->
+				   <input type="text" class="form-control" ng-click="endOpen = !endOpen" datepicker-popup="fullDate" ng-model="data.start_date" is-open="endOpen" ng-init="endOpen = false" min-date="data.start_date" close-text="Close" required />
+			
+				   <span ng-show="data.start_date < today" style="color:red">Date must be current date and above</span>
+				   <!-- {{today}} -->
+                    
+                  </div>
+               </div> 
+            </fieldset>
+			
+			
+			 
+			
+            <fieldset>
+			 <h6><u>Client details</u></h6>
+			 
+			 <fieldset>
+               <div class="form-group"> 
+                  <div class="col-sm-12">
+						<div class="clip-radio radio-primary">
+										<input type="radio" id="new" name="n_client" ng-model="data.n_client" value="new">
+										<label for="new">
+											New Client
+										</label>
+										<input type="radio" id="old" name="n_client" ng-model="data.n_client" value="old">
+										<label for="old">
+											Existing Client
+										</label> 
+						</div>	 
+                  </div>
+               </div>
+            </fieldset>
+			
+				   <div class="form-group" ng-show="data.n_client=='old'">
+					  <label class="col-sm-2 control-label">Select Client</label>
+					  <div class="col-sm-10">
+						 <select type="text" class="form-control" ng-model="data.client" ng-options="c.name for c in clients track by c.client_id">
+						 <option>--Select--</option>
+						 </select>
+					  </div>
+				   </div>
+				   
+				<div ng-show="data.n_client=='new'">
+				   
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Client Name</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_name" name="client_name"/> 
+                  </div>
+				  </div>
+				  
+				   <div class="form-group" ng-controller="DatepickerDemoCtrl">
+					  <label class="col-sm-2 control-label">Date of birth</label>
+					  <div class="col-sm-10 col-lg-4">
+					  <input type="text" class="form-control" ng-click="endOpen = !endOpen" name="dob" datepicker-popup="fullDate" ng-model="data.dob" min-date="dt" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+			
+					  </div>
+				   </div> 
+				  
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Gender</label>
+                  <div class="col-sm-10">
+						<div class="clip-radio radio-primary">
+										<input type="radio" id="Male" name="gender" ng-model="data.gender" value="Male">
+										<label for="Male">
+											Male
+										</label>
+										<input type="radio" id="Female" name="gender" ng-model="data.Female" value="Female">
+										<label for="Female">
+											Female
+										</label> 
+						</div> 
+                  </div>
+               </div>
+				  
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Email Address</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_email" name="client_email"/>
+					  
+                  </div>
+				  </div>
+			   
+			   <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Telephone <span style="color:red">*</span></label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_telephone" name="client_telephone" ng-pattern="/^\d+$/" required />
+					 <span  ng-show="client_telephone.$error.pattern" style="color:red">Not a valid number!</span>  
+                  </div>
+               </div>
+			   
+			   <div class="form-group">
+                  <label class="col-sm-2 control-label">Address</label>
+                  <div class="col-sm-10">
+                     <textarea rows="10" class="form-control"  ng-model="data.client_address" name="client_address"> 
+					 </textarea>
+                  </div>
+               </div>
+				   
+				</div>
+			   
+            </fieldset>
+            
+             <h4>New Import Insurance Costs</h4>
+            <fieldset>
+			 <span style="color:red;">Basic premium:</span> {{total_valuation | number:0}} {{data.currency}}<br/>
+			  
+              <span style="color:red;">Training Levy 0.5 % :</span> {{data.total_levy | number:0}} {{data.currency}}<br/>
+            
+              <span style="color:red;">Sticker Fees :</span> {{(total_p*6000) | number:0}} {{data.currency}}<br/> 
+             
+              <span style="color:red;">VAT 18%:</span> {{((total_valuation*1)+(data.total_levy*1)+(total_p*6000))*0.18 | number:0}} {{data.currency}}<br/>
+            
+              <span style="color:red;">Total Premium :</span> {{((total_valuation*1)+(data.total_levy*1)+(total_p*6000)+(((total_valuation*1)+(data.total_levy*1)+(total_p*6000))*0.18)+(2000)) | number:0}} {{data.currency}}
+            </fieldset> 
+              
+			   
+			   <div class="form-group">
+                  <label class="col-sm-2 control-label">Submit for invoice</label>
+                  <div class="col-sm-10">
+                     <button class="btn btn-primary" ng-click="getInvoice(data)">Process Thirdparty</button>
+                  </div>
+               </div>
+            </fieldset>
+			
+         </form>
+			</div>
+			 
+			
+		<div ng-show="data.motor_category=='Transit'">
+			
+         <form name="TransitForm" class="form-horizontal">
+			
+			<fieldset>
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Select Currency</label>
+                  <div class="col-sm-10">
+                     <select class="form-control" ng-model="data.currency">
+					 <option>--Select--</option>
+					 <option>UGX</option>
+					 <option>USD</option>
+					 <option>KSH</option>
+					 <option>TSH</option>
+					 <option>RF</option>
+					 <option>FBu</option> 
+					 </select>
+                  </div>
+               </div>
+			    
+			 <h6><u>Motor details</u></h6>
+			 
+			 <button class="btn btn-primary" ng-click="addNewChoice()">Add +</button>
+			 <button class="btn btn-danger" ng-click="removeChoice();total_p=0" >Remove -</button><br/>
+			 <table class="table table-bordered">
+			 <tr>
+				<th></th>
+				<th></th> 
+			 </tr>
+			 <tbody> 
+			 <tr ng-repeat="motor_detail in motor_details track by $index">
+				<td width="50%" ng-init="$parent.total_p = (($index + 1));">sticker #{{$index + 1}} 
+				<br/><label>No plate: <span style="color:red">*</span></label><input type="text" class="form-control"  ng-model="motor_detail.vehicle_plate_no" required/>
+				<br/><label>Category: <span style="color:red">*</span></label> <select class="form-control"  ng-model="motor_detail.category" required>
+					 <option>--Select--</option> 
+					 <option>Private</option>
+					 <option>Commercial</option>
+					 <option>Buses</option>  
+					 <option>Motorcycles</option>  
+					 <option>Ambulances</option>  
+					 <option>Bullion Vans/ Fire fighting</option>  
+					 <option>Farm vehicles</option>  
+					 <option>Construction Equipments</option>  
+					 <option>Oil,gas,petro tankers</option>   
+					 <option>Hauliers</option>  
+					 <option>Motor trade</option>					 
+					</select><br/>
+					Class: <span style="color:red">*</span>
+					<select class="form-control" ng-show="motor_detail.category=='Commercial'" ng-model="motor_detail.class" required>
+					 <option>--Select--</option>
+					 <option>Class I:Own Use</option> 
+					 <option>Class II:public use and carrying good for hire</option>
+					 <option>Class III: Private hire, self drive,employed driver</option>
+					 <option>Class IV: PSV</option>
+					</select>
+					<select class="form-control" ng-show="motor_detail.category=='Private'" ng-model="motor_detail.class" required>
+					 <option>--Select--</option>
+					 <option>Class I: own/family</option> 
+					 <option>Class II: company/employed driver</option>
+					</select>
+				<br/><label>Gross Weight:</label> <input type="text" class="form-control" name="value" ng-model="motor_detail.gross_weight"/>
+				<br/><label>Vehicle Use: <span style="color:red">*</span></label>  
+					<select class="form-control" ng-model="motor_detail.use" required>
+					 <option>--Select--</option>
+					 <option ng-show="motor_detail.category=='Buses' || motor_detail.category=='Ambulances' || motor_detail.category=='Bullion Vans/ Fire fighting'">Public</option> 
+					 <option ng-show="motor_detail.category=='Buses' || motor_detail.category=='Ambulances' || motor_detail.category=='Bullion Vans/ Fire fighting'" value="Private">Private(PMO)</option> 
+					 <option ng-show="motor_detail.category=='Farm vehicles'">On premises</option> 
+					 <option ng-show="motor_detail.category=='Farm vehicles'">Off premises</option>
+					 <option ng-show="motor_detail.category=='Construction Equipments'">light and small</option>
+					 <option ng-show="motor_detail.category=='Construction Equipments'">heavy and large</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="single truck">single truck of sub-trailer</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="super-imposed">super-imposed tanker and sub-trailer</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="Water">Water, milk, cesspool emptier tankers</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Single truck (semi-trailer) for own goods</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Single truck (semi-trailer) for public goods</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Super-imposed trailer own goods</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">1st pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">2nd pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">3rd pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">>3 pairs of number plates</option>
+					 <option>N/A</option>
+					</select>
+					<br/>					
+					<select class="form-control" ng-show="motor_detail.use=='On premises' || motor_detail.use=='Off premises'" ng-model="motor_detail.premises" required>
+					 <option>--Select--</option>
+					 <option>Tractor</option> 
+					 <option>Trailer</option>
+					</select>
+					<br/>					
+					<input type="text" class="form-control" ng-show="motor_detail.use=='>3 pairs of number plates'" placeholder="No of pairs" ng-model="motor_detail.motortrade_pair" ng-change="motor_detail.basic_premium2=(((motor_detail.motortrade_pair)-3)*26085)+39130"/> 
+				  
+				 </td>   
+				<td width="50%">
+				<br/><label>Seating capacity <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_no_seats" required />
+				<br/><label>Motor Power(in CC) <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_cc" required/>
+				<br/>
+				<label>Chassis No <span style="color:red">*</span></label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_chasis_no" required/>
+				<br/><label>Motor Make</label>
+					<select class="form-control"  ng-model="motor_detail.vehicle_make">
+					 <option value="">-select-</option>
+					 <option value="Toyota">Toyota</option>
+					 <option value="Mercedez Benz">Mercedez Benz</option>
+					 <option value="Nissan">Nissan</option>
+					 <option value="GMC">GMC</option>
+					 <option value="BMW">BMW</option>
+					 <option value="Isuzu">Isuzu</option>
+					 <option value="Others">Others</option>
+					 </select>
+				 <br/> 
+				<label>Basic Premium</label>
+				<!-- <input ng-show="motor_detail.type=='Other'" type="text" class="form-control" ng-model="motor_detail.other" ng-change="motor_detail.basic_premium2=motor_detail.other"/> --> 
+				
+				<!-- private Class I: own/family --> 
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class I: own/family' && motor_detail.vehicle_no_seats <= 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=21910" />21,910</span>
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class I: own/family' && motor_detail.vehicle_no_seats > 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((motor_detail.vehicle_no_seats-5)*1000)+21910" />{{motor_detail.basic_premium2 | number}}</span>
+				
+				<!-- private Class II: company/employed driver --> 
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class II: company/employed driver' && motor_detail.vehicle_no_seats <= 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class II: company/employed driver' && motor_detail.vehicle_no_seats > 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((motor_detail.vehicle_no_seats-5)*1000)+27390" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				<!-- commercial Class I: own use --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight <= 1500"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=18260" />18,260</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 1501 && motor_detail.gross_weight <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 3001 && motor_detail.gross_weight <= 6000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=40780" />40,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 6001 && motor_detail.gross_weight <= 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=54780" />54,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight > 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.gross_weight-10000)/1000)*2390)+54780" />{{motor_detail.basic_premium2 | number}}</span>
+				
+				<!-- commercial Class II: public use and carrying good for hire --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight <= 1500"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 1501 && motor_detail.gross_weight <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=40780" />40,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 3001 && motor_detail.gross_weight <= 6000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=61625" />61,625</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 6001 && motor_detail.gross_weight <= 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=82170" />82,170</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight > 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.gross_weight-10000)/1000)*4565)+82170" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				<div ng-show="motor_detail.vehicle_no_seats < 21">
+				<!-- commercial Class III: Private hire, self drive,employed driver --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc <= 2000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+31950" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc >= 2001 && motor_detail.vehicle_cc <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+36520" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc > 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+46650" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				
+				<!-- commercial Class IV: PSV --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc <= 2000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+32605" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc >= 2001 && motor_detail.vehicle_cc <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+39130" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc > 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+45650" />{{motor_detail.basic_premium2 | number}}</span>
+				</div>	 
+				
+				<!-- Buses Private(PMO) --> 
+				<span ng-if="motor_detail.use=='Private' && motor_detail.category=='Buses'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+45000" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.use=='Public' && motor_detail.category=='Buses'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*5220)+50000" />{{motor_detail.basic_premium2 | number}}</span>
+				 
+				<!-- Motorcycles/bicycles  -->
+				<span ng-if="motor_detail.vehicle_cc <=50 && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=3260" />3,260</span>
+				<span ng-if="motor_detail.vehicle_cc >=51  && motor_detail.vehicle_cc <=150  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=3915" />3,915</span>
+				<span ng-if="motor_detail.vehicle_cc >=151  && motor_detail.vehicle_cc <=300  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=6520" />6,520</span>
+				<span ng-if="motor_detail.vehicle_cc >=301  && motor_detail.vehicle_cc <=500  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=9785" />9,785</span>
+				<span ng-if="motor_detail.vehicle_cc >500  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13045" />13,045</span>
+				 
+				<!-- Ambulances  -->
+				<span ng-if="motor_detail.category=='Ambulances'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13695" />13,695</span>
+				 
+				<!-- Bullion vans/fire fighting vehicles  -->
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Private' && motor_detail.vehicle_cc <=3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=52170" />52,170</span>
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Private' && motor_detail.vehicle_cc >3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Public'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=91300" />91,300</span>
+				  
+				<!-- Farm vehicles On premises/Off premises -->
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='On premises' && motor_detail.premises=='Tractor'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13695" />13,695</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='On premises' && motor_detail.premises=='Trailer'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=18260" />18,260</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='Off premises' && motor_detail.premises=='Tractor'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=22825" />22,825</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='Off premises' && motor_detail.premises=='Trailer'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=45650" />45,650</span>
+				   
+				<!-- Construction Equipment  -->
+				<span ng-if="motor_detail.category=='Construction Equipments' && motor_detail.use=='light and small'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=26085" />26,085</span>
+				<span ng-if="motor_detail.category=='Construction Equipments' && motor_detail.use=='heavy and large'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				    
+				  
+				<!-- Oil, gas, petrol tankers  -->
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='single truck'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*11735)+195640" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='super-imposed'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*32175)+130425" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='Water'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+78255" />{{motor_detail.basic_premium2 | number}}</span>
+				   
+				<!-- Hauliers  -->
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Single truck (semi-trailer) for own goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+78255" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Single truck (semi-trailer) for public goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+117385" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Super-imposed trailer own goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=158510" />158,510</span>
+				 
+				 
+				<!-- Motor trade  -->
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='1st pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='2nd pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=52170" />52,170</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='3rd pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=39130" />39,130</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='>3 pairs of number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.motortrade_pair)-3)*26085)+39130" />{{motor_detail.basic_premium2 | number}}</span>
+				</fieldset>     
+			  </td>
+			 </tr>
+		 
+			<!-- {{data | json}} -->
+			 </tbody>
+			 <tfoot>
+				<td>Total valuation</td>
+				<td><strong>{{total_valuation | number}} {{data.currency}}</strong></td>
+			 </tfoot>
+			 </table>
+			 <br/>
+			 <!-- {{motor_details | json}} -->
+			 <button class="btn btn-primary" ng-click="getTotal();data.total_levy = ((0.5/(total_p+'00'))*total_valuation);">Generate Basic Premium</button>
+			     
+            </fieldset>
+			 
+			<!-- {{data | json}} -->
+			 <fieldset ng-controller="DatepickerDemoCtrl">
+			 <h6><u>Policy period</u></h6>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Start Date</label>
+                  <div class="col-sm-10 col-lg-4">
+				   <!-- <ng-datepicker format="DD-MM-YYYY" view-format="DD-MM-YYYY" ng-model="data.start_date"></ng-datepicker> -->
+				   <input type="text" class="form-control" ng-click="endOpen = !endOpen" datepicker-popup="fullDate" ng-model="data.start_date" is-open="endOpen" ng-init="endOpen = false" min-date="data.start_date" close-text="Close" required />
+			
+				   <span ng-show="data.start_date < today" style="color:red">Date must be current date and above</span>
+				   <!-- {{today}} -->
+                    
+                  </div>
+               </div>
+			   <!-- <div class="form-group"> -->
+                  <!-- <label class="col-sm-2 control-label">End Date</label> -->
+                  <!-- <div class="col-sm-10"> -->
+				   <!-- <ng-datepicker format="DD-MM-YYYY" view-format="DD-MM-YYYY" ng-model="data.end_date"></ng-datepicker> -->
+                     
+                  <!-- </div> -->
+               <!-- </div> -->
+            </fieldset>
+			
+			
+			 
+			
+            <fieldset>
+			 <h6><u>Client details</u></h6>
+			 
+			 <fieldset>
+               <div class="form-group">
+                  <!-- <label class="col-sm-3 control-label">Select Client</label> -->
+                  <div class="col-sm-12">
+						<div class="clip-radio radio-primary">
+										<input type="radio" id="new" name="n_client" ng-model="data.n_client" value="new">
+										<label for="new">
+											New Client
+										</label>
+										<input type="radio" id="old" name="n_client" ng-model="data.n_client" value="old">
+										<label for="old">
+											Existing Client
+										</label> 
+						</div>	 
+                  </div>
+               </div>
+            </fieldset>
+			
+				   <div class="form-group" ng-show="data.n_client=='old'">
+					  <label class="col-sm-2 control-label">Select Client</label>
+					  <div class="col-sm-10">
+						 <select type="text" class="form-control" ng-model="data.client" ng-options="c.name for c in clients track by c.client_id">
+						 <option>--Select--</option>
+						 </select>
+					  </div>
+				   </div>
+				   
+				<div ng-show="data.n_client=='new'">
+				   
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Client Name</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_name" name="client_name"/> 
+                  </div>
+				  </div>
+				  
+				   <div class="form-group" ng-controller="DatepickerDemoCtrl">
+					  <label class="col-sm-2 control-label">Date of birth</label>
+					  <div class="col-sm-10 col-lg-4">
+					  <input type="text" class="form-control" ng-click="endOpen = !endOpen" name="dob" datepicker-popup="fullDate" ng-model="data.dob" min-date="dt" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+			
+					  </div>
+				   </div> 
+				  
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Gender</label>
+                  <div class="col-sm-10">
+						<div class="clip-radio radio-primary">
+										<input type="radio" id="Male" name="gender" ng-model="data.gender" value="Male">
+										<label for="Male">
+											Male
+										</label>
+										<input type="radio" id="Female" name="gender" ng-model="data.Female" value="Female">
+										<label for="Female">
+											Female
+										</label> 
+						</div> 
+                  </div>
+               </div>
+				  
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Email Address</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_email" name="client_email"/>
+					  
+                  </div>
+				  </div>
+			   
+			   <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Telephone <span style="color:red">*</span></label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_telephone" name="client_telephone" ng-pattern="/^\d+$/" required />
+					 <span  ng-show="client_telephone.$error.pattern" style="color:red">Not a valid number!</span>  
+                  </div>
+               </div>
+			   
+			   <div class="form-group">
+                  <label class="col-sm-2 control-label">Address</label>
+                  <div class="col-sm-10">
+                     <textarea rows="10" class="form-control"  ng-model="data.client_address" name="client_address"> 
+					 </textarea>
+                  </div>
+               </div>
+				   
+				</div>
+			   
+            </fieldset>
+            
+             <h4>Motor Transit Insurance Costs</h4>
+            <fieldset>
+			 <span style="color:red;">Basic premium:</span> {{(total_valuation*0.2) | number:0}} {{data.currency}}<br/>
+			  
+              <span style="color:red;">Training Levy 0.5 % :</span> {{data.total_levy | number:0}} {{data.currency}}<br/>
+            
+              <span style="color:red;">Sticker Fees :</span> {{(total_p*6000) | number:0}} {{data.currency}}<br/>
+            
+              <span style="color:red;">Stamp Duty :</span> {{(total_p*35000) | number:0}} {{data.currency}}<br/>
+             
+              <span style="color:red;">VAT 18%:</span> {{((total_valuation*0.2)+(data.total_levy*1)+(total_p*6000))*0.18 | number:0}} {{data.currency}}<br/>
+            
+              <span style="color:red;">Total Premium :</span> {{(total_valuation*0.2)+(data.total_levy*1)+(total_p*6000)+(total_p*35000)+(((total_valuation*0.2)+(data.total_levy*1)+(total_p*6000))*0.18)+(2000) | number:0}} {{data.currency}}
+            </fieldset> 
+              
+			   
+			   <div class="form-group">
+                  <label class="col-sm-2 control-label">Submit for invoice</label>
+                  <div class="col-sm-10">
+                     <button class="btn btn-primary" ng-click="getInvoice(data)">Process Thirdparty</button>
+                  </div>
+               </div>
+            </fieldset>
+			
+         </form>
+			</div>
+			 
+			
+	<div ng-show="data.motor_category=='Comprehensive'">
+			
+         <form name="comprehensiveForm">
+			<fieldset> 
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-3 control-label">Debit Note No</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="debit_note" ng-model="data.debit_note" required/>
+					 
+                  </div>
+               </div>
+			    
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-3 control-label">Amount Paid for Comprehensive</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" name="comprehensive_paid" ng-model="data.comprehensive_paid" required/>
+                  </div>
+               </div>
+			    
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-3 control-label">Select Currency</label>
+                  <div class="col-sm-9">
+                     <select class="form-control" ng-model="data.currency">
+					 <option>--Select--</option>
+					 <option>UGX</option>
+					 <option>USD</option>
+					 <option>KSH</option>
+					 <option>TSH</option>
+					 <option>RF</option>
+					 <option>FBu</option> 
+					 </select>
+                  </div>
+               </div>
+			   
+            </fieldset> 
+             
+			<fieldset>
+			 <h6><u>Motor details</u></h6>
+			 
+			 <button class="btn btn-primary" ng-click="addNewChoice()">Add +</button>
+			 <button class="btn btn-danger" ng-click="removeChoice();" >Remove -</button><br/>
+			 <table class="table table-bordered">
+			 <tr>
+				<th></th>
+				<th></th> 
+			 </tr>
+			 <tbody> 
+			 <tr ng-repeat="motor_detail in motor_details track by $index">
+				<td width="50%" ng-init="$parent.total_p = (($index + 1))">sticker #{{$index + 1}} 
+				<br/> <label>No plate:</label><input type="text" class="form-control"  ng-model="motor_detail.vehicle_plate_no" required/> 
+				<br/> <label>Category:</label> <select class="form-control"  ng-model="motor_detail.category" required>
+					 <option>--Select--</option> 
+					 <option>Private</option>
+					 <option>Commercial</option>
+					 <option>Buses</option>  
+					 <option>Motorcycles</option>  
+					 <option>Ambulances</option>  
+					 <option>Bullion Vans/ Fire fighting</option>  
+					 <option>Farm vehicles</option>  
+					 <option>Construction Equipments</option>  
+					 <option>Oil,gas,petro tankers</option>   
+					 <option>Hauliers</option>  
+					 <option>Motor trade</option>					 
+					</select><br/>
+					Class:
+					<select class="form-control" ng-show="motor_detail.category=='Commercial'" ng-model="motor_detail.class" required>
+					 <option>--Select--</option>
+					 <option>Class I:Own Use</option> 
+					 <option>Class II:public use and carrying good for hire</option>
+					 <option>Class III: Private hire, self drive,employed driver</option>
+					 <option>Class IV: PSV</option>
+					</select>
+					<select class="form-control" ng-show="motor_detail.category=='Private'" ng-model="motor_detail.class" required>
+					 <option>--Select--</option>
+					 <option>Class I: own/family</option> 
+					 <option>Class II: company/employed driver</option>
+					</select> 
+				<br/> <label>Gross Weight:</label> <input type="text" class="form-control" name="value" ng-model="motor_detail.gross_weight"/>
+				 
+				 <br/><label>Vehicle Use:</label>  
+					<select class="form-control" ng-model="motor_detail.use" required>
+					 <option>--Select--</option>
+					 <option ng-show="motor_detail.category=='Buses' || motor_detail.category=='Ambulances' || motor_detail.category=='Bullion Vans/ Fire fighting'">Public</option> 
+					 <option ng-show="motor_detail.category=='Buses' || motor_detail.category=='Ambulances' || motor_detail.category=='Bullion Vans/ Fire fighting'" value="Private">Private(PMO)</option> 
+					 <option ng-show="motor_detail.category=='Farm vehicles'">On premises</option> 
+					 <option ng-show="motor_detail.category=='Farm vehicles'">Off premises</option>
+					 <option ng-show="motor_detail.category=='Construction Equipments'">light and small</option>
+					 <option ng-show="motor_detail.category=='Construction Equipments'">heavy and large</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="single truck">single truck of sub-trailer</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="super-imposed">super-imposed tanker and sub-trailer</option>
+					 <option ng-show="motor_detail.category=='Oil,gas,petro tankers'" value="Water">Water, milk, cesspool emptier tankers</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Single truck (semi-trailer) for own goods</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Single truck (semi-trailer) for public goods</option>
+					 <option ng-show="motor_detail.category=='Hauliers'">Super-imposed trailer own goods</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">1st pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">2nd pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">3rd pair number plates</option>
+					 <option ng-show="motor_detail.category=='Motor trade'">>3 pairs of number plates</option>
+					 <option>N/A</option>
+					</select>
+					<br/>					
+					<select class="form-control" ng-show="motor_detail.use=='On premises' || motor_detail.use=='Off premises'" ng-model="motor_detail.premises" required>
+					 <option>--Select--</option>
+					 <option>Tractor</option> 
+					 <option>Trailer</option>
+					</select>
+					<br/>					
+					<input type="text" class="form-control" ng-show="motor_detail.use=='>3 pairs of number plates'" placeholder="No of pairs" ng-model="motor_detail.motortrade_pair" ng-change="motor_detail.basic_premium2=(((motor_detail.motortrade_pair)-3)*26085)+39130"/> 
+				 
+				 </td>   
+				<td width="50%">
+				 <br/><label>Seating capacity</label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_no_seats" /> 
+				 <br/><label>Motor Power(in CC)</label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_cc" /> 
+				<br/>
+				 <label>Chassis No</label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_chasis_no" required/> 
+				 <br/><label>Motor Make</label>
+					<select class="form-control"  ng-model="motor_detail.vehicle_make">
+					 <option value="">-select-</option>
+					 <option value="Toyota">Toyota</option>
+					 <option value="Mercedez Benz">Mercedez Benz</option>
+					 <option value="Nissan">Nissan</option>
+					 <option value="GMC">GMC</option>
+					 <option value="BMW">BMW</option>
+					 <option value="Isuzu">Isuzu</option>
+					 <option value="Others">Others</option>
+					 </select> 
+				  
+				 <!-- <fieldset><br/><label>Insure Windscreen</label> -->
+					<!-- <select class="form-control"  ng-model="motor_detail.windscreen_insured">  -->
+					 <!-- <option value="Yes">Yes</option> -->
+					 <!-- <option value="No">No</option>  -->
+					 <!-- </select>  -->
+				 <!-- </fieldset> -->
+				 
+				 <!-- <fieldset ng-show="motor_detail.windscreen_insured=='Yes'"><label>Windscreen Valuation: </label> <input type="text" class="form-control"  ng-model="motor_detail.windscreen_valuation" required/> </fieldset> -->
+				  
+				 <br/> 
+				<label>Basic Premium</label>
+				<!-- <input ng-show="motor_detail.type=='Other'" type="text" class="form-control" ng-model="motor_detail.other" ng-change="motor_detail.basic_premium2=motor_detail.other"/> --> 
+				
+				<!-- private Class I: own/family --> 
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class I: own/family' && motor_detail.vehicle_no_seats <= 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=21910" />21,910</span>
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class I: own/family' && motor_detail.vehicle_no_seats > 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((motor_detail.vehicle_no_seats-5)*1000)+21910" />{{motor_detail.basic_premium2 | number}}</span>
+				
+				<!-- private Class II: company/employed driver --> 
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class II: company/employed driver' && motor_detail.vehicle_no_seats <= 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Private' && motor_detail.class=='Class II: company/employed driver' && motor_detail.vehicle_no_seats > 5"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((motor_detail.vehicle_no_seats-5)*1000)+27390" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				<!-- commercial Class I: own use --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight <= 1500"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=18260" />18,260</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 1501 && motor_detail.gross_weight <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 3001 && motor_detail.gross_weight <= 6000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=40780" />40,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight >= 6001 && motor_detail.gross_weight <= 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=54780" />54,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class I:Own Use' && motor_detail.gross_weight > 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.gross_weight-10000)/1000)*2390)+54780" />{{motor_detail.basic_premium2 | number}}</span>
+				
+				<!-- commercial Class II: public use and carrying good for hire --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight <= 1500"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=27390" />27,390</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 1501 && motor_detail.gross_weight <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=40780" />40,780</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 3001 && motor_detail.gross_weight <= 6000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=61625" />61,625</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight >= 6001 && motor_detail.gross_weight <= 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=82170" />82,170</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class II:public use and carrying good for hire' && motor_detail.gross_weight > 10000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.gross_weight-10000)/1000)*4565)+82170" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				<div ng-show="motor_detail.vehicle_no_seats < 21">
+				<!-- commercial Class III: Private hire, self drive,employed driver --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc <= 2000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+31950" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc >= 2001 && motor_detail.vehicle_cc <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+36520" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class III: Private hire, self drive,employed driver' && motor_detail.vehicle_cc > 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3650)+46650" />{{motor_detail.basic_premium2 | number}}</span>
+					 
+				
+				<!-- commercial Class IV: PSV --> 
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc <= 2000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+32605" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc >= 2001 && motor_detail.vehicle_cc <= 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+39130" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Commercial' && motor_detail.class=='Class IV: PSV' && motor_detail.vehicle_cc > 3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+45650" />{{motor_detail.basic_premium2 | number}}</span>
+				</div>	 
+				
+				<!-- Buses Private(PMO) --> 
+				<span ng-if="motor_detail.use=='Private' && motor_detail.category=='Buses'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*3915)+45000" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.use=='Public' && motor_detail.category=='Buses'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(motor_detail.vehicle_no_seats*5220)+50000" />{{motor_detail.basic_premium2 | number}}</span>
+				 
+				<!-- Motorcycles/bicycles  -->
+				<span ng-if="motor_detail.vehicle_cc <=50 && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=3260" />3,260</span>
+				<span ng-if="motor_detail.vehicle_cc >=51  && motor_detail.vehicle_cc <=150  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=3915" />3,915</span>
+				<span ng-if="motor_detail.vehicle_cc >=151  && motor_detail.vehicle_cc <=300  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=6520" />6,520</span>
+				<span ng-if="motor_detail.vehicle_cc >=301  && motor_detail.vehicle_cc <=500  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=9785" />9,785</span>
+				<span ng-if="motor_detail.vehicle_cc >500  && motor_detail.category=='Motorcycles'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13045" />13,045</span>
+				 
+				<!-- Ambulances  -->
+				<span ng-if="motor_detail.category=='Ambulances'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13695" />13,695</span>
+				 
+				<!-- Bullion vans/fire fighting vehicles  -->
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Private' && motor_detail.vehicle_cc <=3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=52170" />52,170</span>
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Private' && motor_detail.vehicle_cc >3000"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				<span ng-if="motor_detail.category=='Bullion Vans/ Fire fighting' && motor_detail.use=='Public'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=91300" />91,300</span>
+				  
+				<!-- Farm vehicles On premises/Off premises -->
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='On premises' && motor_detail.premises=='Tractor'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=13695" />13,695</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='On premises' && motor_detail.premises=='Trailer'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=18260" />18,260</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='Off premises' && motor_detail.premises=='Tractor'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=22825" />22,825</span>
+				<span ng-if="motor_detail.category=='Farm vehicles' && motor_detail.use=='Off premises' && motor_detail.premises=='Trailer'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=45650" />45,650</span>
+				   
+				<!-- Construction Equipment  -->
+				<span ng-if="motor_detail.category=='Construction Equipments' && motor_detail.use=='light and small'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=26085" />26,085</span>
+				<span ng-if="motor_detail.category=='Construction Equipments' && motor_detail.use=='heavy and large'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				    
+				  
+				<!-- Oil, gas, petrol tankers  -->
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='single truck'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*11735)+195640" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='super-imposed'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*32175)+130425" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Oil,gas,petro tankers' && motor_detail.use=='Water'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+78255" />{{motor_detail.basic_premium2 | number}}</span>
+				   
+				<!-- Hauliers  -->
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Single truck (semi-trailer) for own goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+78255" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Single truck (semi-trailer) for public goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=((((motor_detail.gross_weight)-10000)/1000)*3260)+117385" />{{motor_detail.basic_premium2 | number}}</span>
+				<span ng-if="motor_detail.category=='Hauliers' && motor_detail.use=='Super-imposed trailer own goods'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=158510" />158,510</span>
+				 
+				 
+				<!-- Motor trade  -->
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='1st pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=78255" />78,255</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='2nd pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=52170" />52,170</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='3rd pair number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=39130" />39,130</span>
+				<span ng-if="motor_detail.category=='Motor trade' && motor_detail.use=='>3 pairs of number plates'"><input type="hidden" ng-model="motor_detail.basic_premium2" ng-init="motor_detail.basic_premium2=(((motor_detail.motortrade_pair)-3)*26085)+39130" />{{motor_detail.basic_premium2 | number}}</span>
+				     
+			  </td>
+			 </tr>
+		 
+			<!-- {{data | json}} -->
+			 </tbody>
+			 <tfoot>
+				<td>Total valuation for ONLY MTP</td>
+				<td><strong>{{total_valuation | number}} {{data.currency}}</strong></td>
+			 </tfoot>
+			 </table>
+			 <br/>
+			 <!-- {{motor_details | json}} -->
+			 <button class="btn btn-primary" ng-click="getTotal();data.total_levy = ((0.5/(total_p+'00'))*total_valuation);">Generate Basic Premium</button>
+			     
+            </fieldset>
+			 
+			<!-- {{data | json}} -->
+			 <fieldset>
+			 <h6><u>Policy period</u></h6>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Start Date</label>
+                   <div class="col-sm-10 col-lg-4">
+				   <!-- <ng-datepicker format="DD-MM-YYYY" view-format="DD-MM-YYYY" ng-model="data.start_date"></ng-datepicker> -->
+				   <input type="text" class="form-control" ng-click="endOpen = !endOpen" datepicker-popup="fullDate" ng-model="data.start_date" is-open="endOpen" ng-init="endOpen = false" min-date="data.start_date" close-text="Close" required />
+			
+				   <!-- <span ng-show="data.start_date < today" style="color:red">Date must be current date and above</span> -->
+				   <!-- {{today}} -->
+                    
+                  </div>
+               </div> 
+            
+			  </fieldset>
+			  
+			<fieldset>
+			 <h6><u>Client details</u></h6>
+			 
+			 <fieldset>
+               <div class="form-group">
+                  <!-- <label class="col-sm-3 control-label">Select Client</label> -->
+                  <div class="col-sm-12">
+						<div class="clip-radio radio-primary">
+										<input type="radio" id="new" name="n_client" ng-model="data.n_client" value="new">
+										<label for="new">
+											New Client
+										</label>
+										<input type="radio" id="old" name="n_client" ng-model="data.n_client" value="old">
+										<label for="old">
+											Existing Client
+										</label> 
+						</div>	 
+                  </div>
+               </div>
+            </fieldset>
+			
+				   <div class="form-group" ng-show="data.n_client=='old'">
+					  <label class="col-sm-2 control-label">Select Client</label>
+					  <div class="col-sm-10">
+						 <select type="text" class="form-control" ng-model="data.client" ng-options="c.name for c in clients track by c.client_id">
+						 <option>--Select--</option>
+						 </select>
+					  </div>
+				   </div>
+				   
+				<div ng-show="data.n_client=='new'">
+				   
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-3 control-label">Client Name</label>
+                  <div class="col-sm-9">
+                     <input type="text" class="form-control" ng-model="data.client_name" name="client_name"/> 
+                  </div>
+				  </div>
+				  
+				   <div class="form-group" ng-controller="DatepickerDemoCtrl">
+					  <label class="col-sm-3 control-label">Date of birth</label>
+					  <div class="col-sm-9 col-lg-4">
+					  <input type="text" class="form-control" ng-click="endOpen = !endOpen" name="dob" datepicker-popup="fullDate" ng-model="data.dob" min-date="dt" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+			
+					  </div>
+				   </div> 
+				  
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-3 control-label">Gender</label>
+                  <div class="col-sm-9">
+						<div class="clip-radio radio-primary">
+										<input type="radio" id="Male" name="gender" ng-model="data.gender" value="Male">
+										<label for="Male">
+											Male
+										</label>
+										<input type="radio" id="Female" name="gender" ng-model="data.Female" value="Female">
+										<label for="Female">
+											Female
+										</label> 
+						</div> 
+                  </div>
+               </div>
+				  
+				  <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Email Address</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_email" name="client_email"/>
+					  
+                  </div>
+				  </div>
+			   
+			   <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Telephone <span style="color:red">*</span></label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.client_telephone" name="client_telephone" ng-pattern="/^\d+$/" required />
+					 <span  ng-show="client_telephone.$error.pattern" style="color:red">Not a valid number!</span>  
+                  </div>
+               </div>
+			   
+			   <div class="form-group">
+                  <label class="col-sm-2 control-label">Address</label>
+                  <div class="col-sm-10">
+                     <textarea rows="10" class="form-control"  ng-model="data.client_address" name="client_address"> 
+					 </textarea>
+                  </div>
+               </div>
+				   
+				</div>
+			    
+			
+			
+            <!-- <fieldset> -->
+			 <!-- <span style="color:red;">Total 3rd party premium: {{total_valuation | number}} {{data.currency}}</span> -->
+			 <!-- </fieldset>  -->
+			 <!-- <fieldset> -->
+              <!-- <span style="color:red;">Training Levy 0.5 % : {{data.total_levy | number}} {{data.currency}}</span> -->
+            <!-- </fieldset>  -->
+             
+               <!-- <div class="form-group" ng-show="data.start_date > today && role=='thirdparty_agent' || role=='mtn_agent'"> -->
+                  <!-- <label class="col-sm-2 control-label">Submit for invoice</label> -->
+                  <!-- <div class="col-sm-10"> -->
+                     <!-- <button class="btn btn-primary" ng-click="getInvoice(data)">Process comprehensive Thirdparty</button> -->
+                  <!-- </div> -->
+               <!-- </div> -->
+			   
+			   <div class="form-group" >
+                  <label class="col-sm-2 control-label">Submit for invoice</label>
+                  <div class="col-sm-10">
+                     <button class="btn btn-primary" ng-click="getInvoice(data)">Process comprehensive Thirdparty</button>
+                  </div>
+               </div>
+            </fieldset>
+			
+         </form>
+		</div>
+			 
+           </div>  
+						</div> 
+				 
+				 
+				 
+			</div>
+		</div> 
+<!-- end: BASIC EXAMPLE -->    

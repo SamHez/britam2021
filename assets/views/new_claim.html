@@ -1,0 +1,138 @@
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.claims.ADD">{{ mainTitle }}</h1>
+			<span class="mainDescription">New Claim Notification</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="claimsCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Add User Details</h5> 
+			<div class="row"> 
+					<div class="panel panel-white"> 
+						<div class="panel-body">
+							  
+							   <form class="form-horizontal" enctype="multipart/form-data" method="post">
+            <fieldset> 
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Date Reported</label>
+                  <div class="col-sm-2" ng-controller="DatepickerDemoCtrl">
+                    <!-- <ng-datepicker format="YYYY-MM-DD" view-format="YYYY-MM-DD" ng-model="data.date_reported"></ng-datepicker> -->
+					 <input type="text" class="form-control" ng-click="endOpen = !endOpen" name="date_reported" datepicker-popup="" ng-model="data.date_reported" min-date="data.date_reported" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+										  
+                  </div>
+				  
+				  <label for="input-id-1" class="col-sm-2 control-label">Number Plate</label>
+                  <div class="col-sm-6">
+				  
+                   <input type="text" class="form-control" ng-model="data.number_plate"/> 
+					  
+                  </div>
+               </div> 
+             
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Type of Policy</label>
+                  <div class="col-sm-2">
+                     <select class="form-control" ng-model="data.policy_type" name="policy_type">
+					 <option value="">-select type-</option>
+					 <option value="motor">Motor 3rd Party</option> 
+					 </select>
+					  
+                  </div>
+				  <label for="input-id-1" class="col-sm-2 control-label">Sticker No</label>
+                  <div class="col-sm-6">
+                     <input type="text" class="form-control" name="sticker_no" ng-model="data.sticker_no" />
+					 
+					 
+                  </div>
+                   
+               </div>
+			   
+            
+				<h4>Claimant Details</h4>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Name</label>
+                  <div class="col-sm-10">
+                     <input type="text"  class="form-control" ng-model="data.claimant_name" name="claimant_name" />
+					 
+                  </div>
+               </div>
+            <div class="form-group">
+                  <label class="col-sm-2 control-label">Email</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control"  ng-model="data.claimant_email" name="claimant_email" /> 
+                  </div>
+               </div>
+            <div class="form-group">
+                  <label class="col-sm-2 control-label">Telephone</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control"  ng-model="data.claimant_telephone" name="claimant_telephone" /> 
+                  </div>
+               </div>
+            
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Date of Incident</label>
+                  <div class="col-sm-10 col-lg-4" ng-controller="DatepickerDemoCtrl">
+                     <!-- <ng-datepicker format="YYYY-MM-DD" view-format="YYYY-MM-DD" ng-model="data.date_of_incident"></ng-datepicker> -->
+					 <input type="text" class="form-control" ng-click="endOpen = !endOpen" name="date_of_incident" datepicker-popup="" ng-model="data.date_of_incident" min-date="data.date_of_incident" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+					
+                  </div>
+               </div>
+			   
+             
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Details of incident</label>
+                  <div class="col-sm-10">
+                     <textarea rows="5" class="form-control"  ng-model="data.details_of_incident" name="details_of_incident"> 
+					 </textarea>
+                  </div>
+               </div>
+             
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Claim Estimate</label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" ng-model="data.claim_estimate" name="claim_estimate"/>
+					  
+                  </div>
+               </div>
+			   
+             
+               <div class="form-group">
+                  <label for="input-id-1" class="col-sm-2 control-label">Attach documents</label>
+                  <div class="col-sm-10">
+                     <input type="file" class="form-control" file-model="myFile" name="myFile"/>
+                     <input type="file" class="form-control" file-model="myFile2" name="myFile2"/>
+                     <input type="file" class="form-control" file-model="myFile3" name="myFile3"/>
+					  
+                  </div>
+               </div>
+			   
+           
+               <div class="form-group">
+                  <label class="col-sm-2 control-label"></label>
+                  <div class="col-sm-10">
+                     <button class="btn btn-primary" ng-click="addClaimNotify(data)">Submit</button>
+                  </div>
+               </div>
+            </fieldset>
+              
+             
+         </form>
+		 <!-- {{data | json}} -->
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

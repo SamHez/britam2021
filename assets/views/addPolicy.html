@@ -1,0 +1,55 @@
+ <html> 
+<head>
+</head>
+<body> 
+<div class="modal-header">
+<a class="close" data-dismiss="alert" aria-label="close" ng-click="close()"><i class="fa fa-times"></i></a>
+<h3 class="modal-title"><i class="fa fa-print"></i> Add Policy</h3> 
+</div>
+<div class="modal-body">
+
+<form class="form-horizontal" enctype="multipart/form-data" name="pay">
+				 
+        <!-- <div class="form-group"> -->
+          <!-- <label class="col-sm-3 control-label">Organisation</label> -->
+          <!-- <div class="col-sm-9"> -->
+            <!-- <select class="form-control" ng-model="data.organ_id" required>  -->
+				<!-- <option>-select-</option> -->
+				<!-- <option ng-repeat="o in organisation" value="{{o.organ_id}}">{{o.name}} {{o.address}}</option> -->
+			<!-- </select>			  -->
+          <!-- </div> -->
+        <!-- </div> -->
+		 
+         
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+		
+		<div class="form-group">
+          <label class="col-sm-3 control-label">Policy Number</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="data.policy_no" required />                        
+          </div>
+        </div> 
+		 
+         
+        <div class="line line-dashed b-b line-lg pull-in"></div>  
+		
+		  
+          
+		<!-- {{data | json}}	 -->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9"> 
+						<button class="btn btn-primary" ng-disabled="pay.$invalid" ng-click="ad_Policy(data)">
+							<i class="fa fa-dollar"></i> Add Policy Nos
+						</button> 
+						<!-- {{data | json}} -->
+					</div>
+				</div>   
+				
+</form>
+ 
+
+</div>
+</body>
+</html>

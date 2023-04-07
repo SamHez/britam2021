@@ -1,0 +1,285 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.pages.USERPROFILE">{{ mainTitle }}</h1>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: USER PROFILE -->
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- /// controller:  'UserCtrl' -  localtion: assets/js/controllers/userCtrl.js /// -->
+			<div ng-controller="UserProfileCtrl">
+				<!-- start: USER TABSET -->
+				<tabset class="tabbable">
+					<!-- start: TAB OVERVIEW -->
+					<tab heading="Overview">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="user-left">
+									<div class="center">
+										<h4>{{data.name}}</h4>
+										<div flow-init="{singleFile:true}" flow-name="obj.flow" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+											<div class="user-image">
+												<div class="thumbnail">
+													<img src="{{data.img}}" alt="" ng-if="!obj.flow.files.length && noImage">
+													<img ng-src="{{data.img}}" alt="" ng-if="!obj.flow.files.length && !noImage"> 
+												</div>
+												 
+											</div>
+										</div>
+										<hr> 
+									</div>
+									<table class="table table-condensed">
+										<thead>
+											<tr>
+												<th colspan="3">Contact Information</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>License No</td>
+												<td> 
+													{{data.license_no}}
+												</td>
+											</tr>
+											<tr>
+												<td>Name</td>
+												<td> 
+													{{data.name}}
+												</td>
+											</tr> 
+											<tr>
+												<td>Email:</td>
+												<td>
+												<a href>
+													{{data.email}}
+												</a></td>
+											</tr>
+											<tr>
+												<td>Contact</td>
+												<td>{{data.telephone}}</td>
+											</tr>
+											 
+										</tbody>
+									</table>
+									<table class="table table-condensed">
+										<thead>
+											<tr>
+												<th colspan="3">General information</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Gender</td>
+												<td>{{data.gender | uppercase}}</td>
+											</tr> 
+											<tr>
+												<td>National ID No</td>
+												<td>{{data.NIN}}</td>
+											</tr>
+											 
+											<tr>
+												<td>Access Level</td>
+												<td><span class="label label-sm label-info">{{data.role | uppercase}}</span></td>
+											</tr>
+											<tr>
+												<td>Address</td>
+												<td>{{data.address}}</td> 
+											</tr>
+										</tbody>
+									</table>
+									 
+									<div class="text-right">
+										<a class="btn btn-primary btn-o btn-wide" href="#" ng-click="editActive = true">
+											Edit Account
+										</a>
+									</div>
+								</div>
+							</div>
+							 
+						</div>
+					</tab>
+					<!-- end: TAB OVERVIEW -->
+					<!-- start: TAB EDIT ACCOUNT -->
+					<tab heading="Edit Account" active="editActive">
+			<form method="POST" enctype="multipart/form-data">
+							<fieldset>
+								<legend>
+									Account Info
+								</legend>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">
+												Name
+											</label>
+											<input type="text" placeholder="Enter your Name" class="form-control" name="name" ng-model="data.name">
+										</div>
+										 
+										<div class="form-group" ng-controller="DatepickerDemoCtrl">
+											<label class="control-label">
+												Date of Birth
+											</label>
+											<input type="text" class="form-control" ng-click="endOpen = !endOpen" name="dob" datepicker-popup="" ng-model="data.dob" min-date="data.dob" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+										</div>
+										 
+										<div class="form-group">
+											<label class="control-label">
+												Email
+											</label>
+											<input type="email" class="form-control" name="email" ng-model="data.email">
+										</div>
+										 
+										 <div class="form-group">
+											<label class="control-label">
+												Telephone
+											</label>
+											<input type="text" placeholder="Telephone" class="form-control" name="telephone" ng-model="data.telephone">
+										</div>
+										<div class="form-group">
+											<label class="control-label">
+												Address
+											</label>
+											<input type="text" placeholder="Address" class="form-control" name="address" ng-model="data.address">
+										</div>
+										<div class="form-group">
+											<label class="block">
+												Branch Name
+											</label>
+											<input type="text" placeholder="Branch Name" class="form-control" name="branch_name" ng-model="data.branch_name">
+											
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="block">
+												Gender
+											</label>
+											<div class="clip-radio radio-primary">
+												<input type="radio" id="us-female" name="gender" value="female" ng-model="data.gender">
+												<label for="us-female">
+													Female
+												</label>
+												<input type="radio" id="us-male" name="gender" value="male" ng-model="data.gender">
+												<label for="us-male">
+													Male
+												</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												  
+											 
+												<div class="form-group">
+											<!-- <form method="POST" enctype="multipart/form-data"> -->
+															<label>
+																Browse Photo
+															</label>
+															<div>
+																<div class="user-image">
+																	<div class="thumbnail margin-bottom-5">
+																		<!-- <img src="assets/images/default-user.png" alt="" ng-if="!obj.flow.files.length && noImage"> -->
+																		<img ng-src="{{data.img||uploaderImages}}" alt="" ng-if="!obj.flow.files.length && !noImage"> 
+																		
+																		<span class="btn btn-primary btn-o btn-file"> Select single file
+																		<input type="file"  nv-file-select="" uploader="uploaderImages" />
+																		</span>	
+																		
+																		<button type="button" class="btn btn-primary btn-s" ng-click="uploaderImages.uploadAll()" ng-disabled="!uploaderImages.getNotUploadedItems().length">
+																			<span class="glyphicon glyphicon-upload"></span> Upload profile picture
+																		</button>																		
+																		<!-- <button ng-click="uploadImage()" class="btn">Upload Photo</button> -->
+																		<div>
+																			Queue progress:
+																			<div class="progress progress-xs margin-top-5 margin-bottom-20">
+																				<div class="progress-bar " role="progressbar" ng-style="{ 'width': uploaderImages.progress + '%' }"></div>
+																			</div>
+																		</div>
+																		
+																	</div>
+																</div>
+																 <!-- {{uid}} -->
+											
+										
+														</div>
+												<!-- </form> -->
+												</div>
+										</div>
+										
+									</div>
+									
+									<button class="btn btn-primary" ng-click="updateUserProfile(data)">Update Profile</button>
+								</div>
+							</fieldset>
+							 
+						</form>
+						
+								
+					</tab>
+					<!-- end: TAB EDIT ACCOUNT -->
+					<!-- start: TAB PROJECTS -->
+					 
+					<!-- end: TAB PROJECTS -->
+					<tab heading="Edit Password">
+						<form name="userForm">
+							<fieldset>
+								<legend>
+									Change Password
+								</legend>
+								<div class="row">
+									<div class="col-md-6">
+										 
+										<div class="row"> 
+											<div class="col-md-8">
+												<div class="form-group">
+													<label class="control-label">
+														New Password
+													</label>
+													<input class="form-control" placeholder="New Password" type="password" name="password1" ng-model="data.password1" required>
+													<!-- <input class="form-control" type="hidden" name="uid" ng-model="uid"> -->
+												</div>
+												
+											</div>
+											<div class="col-md-8">
+												<div class="form-group">
+													<label class="control-label">
+														Match Password
+													</label>
+													<input class="form-control" placeholder="Match Password" type="password" name="PassWord_U" ng-model="data.PassWord_U" required>
+													<!-- <input class="form-control" type="hidden" name="uid" ng-model="uid"> -->
+													<span ng-show="data.password1 != data.PassWord_U" style="color:red">password dont much or password too small please try again</span>
+												</div>
+												
+											</div>
+										</div>
+										
+									</div>
+									
+									<button class="btn btn-primary" ng-show="data.password1 == data.PassWord_U" ng-click="updateUserPassword(data)" ng-disabled="userForm.$invalid">Update Password</button>
+								</div>
+							</fieldset>
+							 
+						</form>
+						
+					</tab>
+					<!-- start: TAB PROJECTS -->
+					 
+					<!-- end: TAB PROJECTS -->
+					<!-- start: TAB PROJECTS -->
+					 
+					<!-- end: TAB PROJECTS -->
+					<!-- start: TAB PROJECTS -->
+					 
+					<!-- end: TAB PROJECTS -->
+				</tabset>
+				<!-- end: USER TABSET -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: USER PROFILE -->

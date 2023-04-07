@@ -1,0 +1,94 @@
+ <html> 
+<head>
+</head>
+<body> 
+<div class="modal-header">
+<a class="close" data-dismiss="alert" aria-label="close" ng-click="close()"><i class="fa fa-times"></i></a>
+<h3 class="modal-title"><i class="fa fa-print"></i> Assign Sticker</h3> 
+</div>
+<div class="modal-body">
+
+<form class="form-horizontal" enctype="multipart/form-data" name="pay">
+				 
+        <!-- <div class="form-group"> -->
+          <!-- <label class="col-sm-3 control-label">Organisation</label> -->
+          <!-- <div class="col-sm-9"> -->
+            <!-- <select class="form-control" ng-model="data.organ_id" required>  -->
+				<!-- <option>-select-</option> -->
+				<!-- <option ng-repeat="o in organisation" value="{{o.organ_id}}">{{o.name}} {{o.address}}</option> -->
+			<!-- </select>			  -->
+          <!-- </div> -->
+        <!-- </div> -->
+		
+		 <div class="form-group">
+          <label class="col-sm-3 control-label">Attach to Agent</label>
+          <div class="col-sm-9">
+            <select class="form-control" ng-model="data.agent_user_id" required> 
+				<option>-select-</option>
+				<option value="admin">Admin</option>
+				<option ng-repeat="a in agents" value="{{a.user_id}}">{{a.license_no}} {{a.name}}</option>
+			</select>			
+            <!-- <input type="hidden" class="form-control" ng-model="data.invoice_detail_id" />                         -->
+          </div>
+        </div> 
+		 
+         
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+		
+		<div class="form-group">
+          <label class="col-sm-3 control-label">Sticker Number</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="data.sticker_no_from" placeholder="Sticker From" name="sticker_no_from" ng-pattern="/^\d+$/" required /><span  ng-show="pay.sticker_no_from.$error.pattern" style="color:red">Not a valid number!</span><br/>                        
+            <input type="text" class="form-control" ng-model="data.sticker_no_to" placeholder="Sticker To"  name="sticker_no_to" ng-pattern="/^\d+$/" required /><span  ng-show="pay.sticker_no_to.$error.pattern" style="color:red">Not a valid number!</span>                       
+          </div>
+        </div> 
+		 
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+		
+		<div class="form-group">
+          <label class="col-sm-3 control-label">Category</label>
+          <div class="col-sm-9">
+            <select class="form-control" ng-model="data.category" name="category" required>
+				<option value="">-select-</option>
+				<option value="Motor Bike">Motor Bike</option>
+				<option value="Motor Transit">Motor Transit</option>
+				<option value="Motor Private">Motor Private</option>
+				<option value="Motor Commercial">Motor Commercial</option>
+				
+			</select>
+          </div>
+        </div> 
+		  
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+		
+		<div class="form-group">
+          <label class="col-sm-3 control-label">Reference No</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="data.policy_no" name="policy_no" placeholder="Reference No" required />                      
+          </div>
+        </div> 
+		 
+		 <!-- <button ng-click="range(data.sticker_no_from,data.sticker_no_to)">testing ranges</button> -->
+         <!-- {{list | json}} -->
+        <!-- <div class="line line-dashed b-b line-lg pull-in"></div>   -->
+		
+		  
+          
+		<!-- {{data | json}}	 -->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9"> 
+						<button class="btn btn-primary" ng-disabled="pay.$invalid" ng-click="range(data.sticker_no_from,data.sticker_no_to);ad_Sticker(data)">
+							<i class="fa fa-dollar"></i> Add Sticker
+						</button> 
+						<!-- {{data | json}} -->
+					</div>
+				</div>   
+				
+</form>
+ 
+
+</div>
+</body>
+</html>

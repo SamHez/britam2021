@@ -1,0 +1,284 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Status Reports</h1>
+			<span class="mainDescription">Status Reports</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: RESPONSIVE TABLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="StatusReportsCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">{{type}} Reports</span></h5> 
+			<div class="alert alert-info">
+				click load reports to show status reports
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+				<div dropdown="dropdown" class="input-group-btnz">
+                           <button type="button" dropdown-toggle="" tabindex="-1" class="btn btn-primary ">Load Reports
+                              <span class="caret"></span></button> 
+                           <ul class="dropdown-menu">
+                              <li><a href="#" ng-click="type='Paid MTP';loadStatusReports('paid','thirdparty');">MTP</a>
+                              </li>
+                              <li><a href="#" ng-click="type='Paid Comprehensive';loadStatusReports('paid','comprehensive');">Comprehensive</a>
+                              </li>
+                              <li><a href="#" ng-click="type='Paid Windscreen';">Windscreen</a>
+                              </li> 
+                           </ul>
+				</div>
+				</div>
+			</div>
+			
+			<div ng-if="type=='Paid MTP'">
+			<div class="row">  
+			  <div class="col-md-3">
+			  <!-- <h5 class="text-bold margin-top-25 margin-bottom-15">.</h5> -->
+			   <div class="input-group">
+			    <div class="btn-group" dropdown>
+					<button type="button" class="btn btn-primary">
+						<i class="ti-download"></i> Export Report
+					</button>
+					<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+						<span class="caret"></span>
+						<span class="sr-only">Split button!</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<!-- <li> -->
+							<!-- <a ng-click="exportAction('pdf')"> -->
+								<!-- PDF -->
+							<!-- </a> -->
+						<!-- </li> -->
+						<li>
+							<a ng-click="exportAction('doc')">
+								DOC
+							</a>
+						</li>
+						<li>
+							<a ng-click="exportAction('csv')">
+								CSV
+							</a>
+						</li> 
+						<li>
+							<a ng-click="exportAction('excel')">
+								Excel
+							</a>
+						</li>
+					</ul>
+				</div>
+			   </div>
+			  </div>
+			</div>
+			<p></p>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped export-table">
+						 <thead>
+						 <tr>
+							   
+							   <th colspan=25 text-align="center">Reports showing {{type}} policies</th>
+							    
+							</tr>
+							
+							<tr>
+							   
+							   <th>Policy Holder</th>
+							   <th>Reg No</th>
+							   <th>Car Make</th>
+							   <th>Seating capacity</th>
+							   <th>G.weight</th>
+							   <th>Sticker No</th>
+							   <th>Category of Sticker</th>
+							   <th>Type of Cover</th>
+							   <th>Start Date</th>
+							   <th>End Date</th>
+							   <th>Validity</th>
+							   <th>Basic premium</th>
+							   <th>Training Levy</th> 
+							   <th>Sticker Fees</th>  
+							   <th>VAT Charge</th>  
+							   <th>Stamp Duty</th> 
+							   <th>Gross Commission</th> 
+							   <th>Issuing Branch</th> 
+							   <th>Issuing Officer</th> 
+							   <th>Currency</th>
+							</tr>
+						 </thead>
+						 <tbody>
+							<tr data-ng-repeat="q in status_mtp">
+							   
+							   <td>{{q.client_name}}</td>
+							   <td>{{q.vehicle_plate_no}}</td>
+							   <td>{{q.vehicle_make}}</td>
+							   <td>{{q.vehicle_no_seats}}</td> 
+							   <td>{{q.gross_weight}}</td>  
+							   <td>{{q.sticker_no}}</td> 
+							   <td>{{q.vehicle_category}}</td>							   
+							   <td>
+							   <span ng-show="q.iclass=='thirdparty'">MTP</span>
+							   <span ng-show="q.iclass=='comprehensive'">COMPREHENSIVE</span>
+							   <span ng-show="q.iclass=='enhanced'">ENHANCED</span>
+							   </td>
+							   <!-- <td>{{q.organ_name}}</td>  --> 
+							   <td>{{q.start_date}}</td>
+							   <td>{{q.end_date}}</td> 
+							   <td>{{(q.validity)}} YR(s)</td> 
+							   <td ng-init="$parent.total_basic_premium = ($parent.total_basic_premium+(q.basic_p*1))">{{q.basic_p | number:0}}</td> 
+							   <td ng-init="$parent.total_levy = ($parent.total_levy+(q.training_levy*1))">{{q.training_levy | number:0}}</td>
+							   <td ng-init="$parent.total_sticker_fees = ($parent.total_sticker_fees+(q.sticker_fees*1))">{{q.sticker_fees | number:0}}</td>
+							   <td ng-init="$parent.total_vat = ($parent.total_vat+(((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1))*0.18))">{{((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1))*0.18 | number:0}}</td>
+							   <td ng-init="$parent.total_stamp_duty = ($parent.total_stamp_duty+(q.stamp_duty*1))">{{q.stamp_duty | number:0}}</td>
+							   <td ng-init="$parent.total_commission = ($parent.total_commission+(q.basic_p*0.1))">{{(q.basic_p*0.1) | number:0}}</td> 
+							   <td>{{q.branch}}</td>
+							   <td>{{q.agent_details}}</td>							   
+							   <td>{{q.currency}}</td>
+							   
+							</tr>
+							 
+						 </tbody>
+						 <tfoot>
+						 <th colspan=11>Grand Totals</th> 
+						 <th>{{total_basic_premium | number:0 }}</th>
+						 <th>{{total_levy | number:0 }}</th>
+						 <th>{{total_sticker_fees | number:0 }}</th>
+						 <th>{{total_vat | number:0 }}</th>
+						 <th>{{total_stamp_duty | number:0 }}</th> 
+						 <th>{{total_commission | number:0 }}</th> 
+						 <th></th> 
+						 <th></th> 
+						 <td>UGX</td>  
+						 </tfoot> 
+					  </table>
+			</div>
+			
+			</div>
+			
+			<div ng-if="type=='Paid Comprehensive'">
+			<div class="row">
+		  
+			  <div class="col-md-3">
+			  <!-- <h5 class="text-bold margin-top-25 margin-bottom-15">.</h5> -->
+			   <div class="input-group">
+			    <div class="btn-group" dropdown>
+					<button type="button" class="btn btn-primary">
+						<i class="ti-download"></i> Export Report
+					</button>
+					<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+						<span class="caret"></span>
+						<span class="sr-only">Split button!</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<!-- <li> -->
+							<!-- <a ng-click="exportAction('pdf')"> -->
+								<!-- PDF -->
+							<!-- </a> -->
+						<!-- </li> -->
+						<li>
+							<a ng-click="exportAction('doc')">
+								DOC
+							</a>
+						</li>
+						<li>
+							<a ng-click="exportAction('csv')">
+								CSV
+							</a>
+						</li> 
+						<li>
+							<a ng-click="exportAction('excel')">
+								Excel
+							</a>
+						</li>
+					</ul>
+				</div>
+			   </div>
+			  </div>
+			</div>
+			<p></p>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+						 <thead>
+						    <tr> 
+							   <th colspan=25 text-align="center">Reports showing {{type}} policies</th> 
+							</tr>
+							
+							<tr> 
+							   <th>Policy Holder</th>
+							   <th>Reg No</th>
+							   <th>Car Make</th>
+							   <th>Seating capacity</th>
+							   <th>G.weight</th>
+							   <th>Sticker No</th>
+							   <th>Category of Sticker</th>
+							   <th>Type of Cover</th>
+							   <th>Start Date</th>
+							   <th>End Date</th>
+							   <th>Validity</th>
+							   <th>Comprehensive charged</th>
+							   <th>Training Levy</th> 
+							   <th>Sticker Fees</th>  
+							   <th>VAT Charge</th>  
+							   <th>Stamp Duty</th> 
+							   <th>Gross Commission</th> 
+							   <th>Issuing Branch</th> 
+							   <th>Issuing Officer</th> 
+							   <th>Currency</th>
+							</tr>
+						 </thead>
+						 <tbody>
+							<tr data-ng-repeat="q in status_comprehensive | filter: search.name">
+							   
+							   <td>{{q.client_name}}</td>
+							   <td>{{q.vehicle_plate_no}}</td>
+							   <td>{{q.vehicle_make}}</td>
+							   <td>{{q.vehicle_no_seats}}</td> 
+							   <td>{{q.gross_weight}}</td>  
+							   <td>{{q.sticker_no}}</td> 
+							   <td>{{q.vehicle_category}}</td>							   
+							   <td>
+							   <span ng-show="q.iclass=='thirdparty'">MTP</span>
+							   <span ng-show="q.iclass=='comprehensive'">COMPREHENSIVE</span>
+							   <span ng-show="q.iclass=='enhanced'">ENHANCED</span>
+							   </td>
+							   <!-- <td>{{q.organ_name}}</td>  --> 
+							   <td>{{q.start_date}}</td>
+							   <td>{{q.end_date}}</td> 
+							   <td>{{(q.validity)}} YR(s)</td> 
+							   <td ng-init="$parent.total_comprehensive = ($parent.total_comprehensive+(q.comprehensive_paid*1))">{{q.comprehensive_paid | number:0}}</td> 
+							   <td ng-init="$parent.total_levy = ($parent.total_levy+(q.training_levy*1))">{{q.training_levy | number:0}}</td>
+							   <td ng-init="$parent.total_sticker_fees = ($parent.total_sticker_fees+(q.sticker_fees*1))">{{q.sticker_fees | number:0}}</td>
+							   <td ng-init="$parent.total_vat = ($parent.total_vat+(((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1))*0.18))">{{((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1))*0.18 | number:0}}</td>
+							   <td ng-init="$parent.total_stamp_duty = ($parent.total_stamp_duty+(q.stamp_duty*1))">{{q.stamp_duty | number:0}}</td>
+							   <td ng-init="$parent.total_commission = ($parent.total_commission+(q.basic_p*0.1))">{{(q.basic_p*0.1) | number:0}}</td> 
+							   <td>{{q.branch}}</td>
+							   <td>{{q.agent_details}}</td>							   
+							   <td>{{q.currency}}</td>
+							   
+							</tr>
+							 
+						 </tbody>
+						 <tfoot>
+						 <th colspan=11>Grand Totals</th> 
+						 <th>{{total_comprehensive | number:0 }}</th>
+						 <th>{{total_levy | number:0 }}</th>
+						 <th>{{total_sticker_fees | number:0 }}</th>
+						 <th>{{total_vat | number:0 }}</th>
+						 <th>{{total_stamp_duty | number:0 }}</th> 
+						 <th>{{total_commission | number:0 }}</th> 
+						 <th></th> 
+						 <th></th> 
+						 <td>UGX</td>  
+						 </tfoot> 
+					  </table>
+			</div>
+			
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+<!-- end: RESPONSIVE TABLE -->
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script data-require="angular.js@1.5.x" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.10/angular.min.js" data-semver="1.5.10"></script>
+    
+    <script src="tableExport.js"></script>
+    <script src="app/jquery.base64.js"></script>
+    <script src="app/sprintf.js"></script>
+    <script src="app/jspdf.js"></script>
+    <script src="app/base64.js"></script>
+    
+    <script src="app.js"></script>
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <p>Export HTML Table to Excel, Pdf, CSV and Doc</p>
+    
+    <table class="export-table" style="width: 100%; margin-top: 20px">
+          <thead>
+              <tr>
+                  <th>Employee ID</th>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Salary</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr ng-repeat="item in reportData">
+                  <td>{{item.EmployeeID}}</td>
+                  <td>{{item.LastName}}</td>
+                  <td>{{item.FirstName}}</td>
+                  <td>{{item.Salary}}</td>
+              </tr>
+          </tbody>
+    </table>
+    <hr>
+    <a href="#" data-ng-click="exportAction('csv')"> Export CSV</a><br/><br/>
+    <a href="#" data-ng-click="exportAction('excel')"> Export Excel</a><br/><br/>
+    <a href="#" data-ng-click="exportAction('doc')"> Export Doc</a><br/><br/>
+    <a href="#" data-ng-click="exportAction('pdf')"> Export Pdf</a><br/><br/>
+  </body>
+
+</html>

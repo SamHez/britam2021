@@ -1,0 +1,100 @@
+<!-- start: DASHBOARD TITLE -->
+<section id="page-title" class="padding-top-15 padding-bottom-15">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1 class="mainTitle" translate="dashboard.WELCOME" translate-values="{ appName: app.name }">{{ mainTitle }}</h1>
+			<span class="mainDescription">With you every step of the way</span>
+		</div>
+		 
+	</div>
+</section>
+<!-- end: DASHBOARD TITLE -->
+<!-- start: FEATURED BOX LINKS -->
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="panel panel-purple no-radius text-center">
+				<div class="panel-body">
+					<p class="text-small" style="text-align:left">
+						{{claim_settlement}}
+					</p> 
+					<br/>
+					<!-- <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-smile-o fa-stack-1x fa-inverse"></i> </span> -->
+					<h5 class=" text-white" style="text-align:right">Claim Settlements</h5>
+					 
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3" ng-if="role=='admin' || role=='thirdparty_admin' || role=='thirdparty_agent' || role=='mtn_dealer'">
+			<div class="panel panel-red no-radius text-center">
+				<div class="panel-body">
+					<p class="text-small" style="text-align:left">
+						{{party}}
+					</p> 
+					<br/>
+					<!-- <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-danger"></i> <i class="fa fa-paperclip fa-stack-1x fa-inverse"></i> </span> -->
+					<h5 class=" text-white" style="text-align:right">Stickers </h5>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="panel panel-yellow no-radius text-center">
+				<div class="panel-body">
+					<p class="text-small" style="text-align:left">
+						{{policies}}
+					</p> 
+					<br/>
+					<!-- <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span> -->
+					<h5 class="text-white" style="text-align:right">Policies</h5>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="panel panel-green no-radius text-center">
+				<div class="panel-body">
+					<p class="text-small" style="text-align:left">
+						{{claim_notification}}
+					</p>
+					<br/> 
+					<!-- <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span> -->
+					<h5 class="text-white" style="text-align:right">Claim Notifications</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: FEATURED BOX LINKS -->
+<!-- start: FIRST SECTION -->
+<div class="container-fluid container-fullw padding-bottom-10">
+	<div class="row">
+		<div class="col-sm-12">
+			<!-- <div class="row"> -->
+				<!-- <div class="col-md-7 col-lg-8"> -->
+					<div class="panel panel-white no-radius" id="visits">
+						<div class="panel-heading border-light">
+							<h4 class="panel-title"> Monthly Stickers </h4>
+							<ul class="panel-heading-tabs border-light">
+								 
+								<li class="panel-tools">
+									<ct-paneltool tool-refresh="load1"></ct-paneltool>
+								</li>
+							</ul>
+						</div>
+						<div collapse="visits" ng-init="visits=false" class="panel-wrapper">
+							<div class="panel-body">
+								<!-- /// controller:  'VisitsCtrl' -  localtion: assets/js/controllers/dashboardCtrl.js /// -->
+								<div ng-controller="SalesCtrl" class="height-350">
+									<canvas class="tc-chart" tc-chartjs-bar chart-options="options" chart-data="data" chart-legend="chart2"></canvas>
+									<div tc-chartjs-legend chart-legend="chart2" class="inline pull-left legend-xs"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- </div> -->
+				 
+			<!-- </div> -->
+		</div>
+	</div>
+</div>
+<!-- end: FIRST SECTION -->   

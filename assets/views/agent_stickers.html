@@ -1,0 +1,129 @@
+ <html> 
+<head>
+</head>
+<body>
+<style>
+    @media print {
+    body * {
+        visibility: hidden;
+    }
+    #print-content * {
+        visibility: visible;
+    }
+    .modal{
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        min-height:550px
+    }
+}
+    
+</style>
+<div class="modal-header">
+<a class="close" data-dismiss="alert" aria-label="close" ng-click="close()"><i class="fa fa-times"></i></a>
+<h4 class="modal-title"><i class="fa fa-print"></i> Agent #{{data.name}} Issued Stickers</h4> 
+</div>
+<div class="modal-body">
+<fieldset>
+<input type="text" class="form-control" placeholder="Search..." ng-model="search.name" />
+</fieldset>
+<form class="form-horizontal" enctype="multipart/form-data" name="pay">
+				 
+           
+		 <div id="print-content"> 
+		 <div class="form-group"> 
+		 <div class="col-sm-12">
+		 <div class="table-responsive">
+				<div class="table-responsive">
+		 <table class="table table-bordered table-striped">
+						 <thead>
+							<tr class="primary">
+							   <th>Client</th> 
+							   <!-- <th>Company</th>  -->
+							   <th>Policy Start</th>
+							   <th>Policy End</th>
+							   <th>Sticker No</th>
+							   <th>Policy No</th>  
+							   <th>Vehicle Use</th>
+							   <th>No plate</th>
+							   <th>Seating Capacity</th>
+							   <th>CC</th>
+							   <th>Commission</th>
+							   <th>Basic premium</th>
+							   <th>Stamp Duty</th>
+							   <th>Sticker Fees</th>
+							   <th>Training Levy(0.5%)</th>
+							   <th>VAT(18%)</th>
+							   <th>Total Premium</th> 
+							   <th>Currency</th>
+							   <th>Action</th>
+							</tr>
+						 </thead>
+						 <tbody>
+							<tr data-ng-repeat="q in userStickers | filter: search.name">
+							   <td>{{q.client_name}}</td> 
+							   <!-- <td>{{q.organ_name}}</td>    -->
+							   <td>{{q.start_date}}</td>
+							   <td>{{q.end_date}}</td>
+							   <td>{{q.sticker_no}}</td>
+							   <td>{{q.policy_no}}</td>
+							   <td>{{q.vehicle_use}}</td>   
+							   <td>{{q.vehicle_plate_no | uppercase}}</td> 
+							   <td>{{q.vehicle_no_seats}}</td> 
+							   <td>{{q.vehicle_cc}}</td>
+							   <td ng-init="$parent.total_commission = ($parent.total_commission+(q.basic_p*(0.1)))">{{q.basic_p*(0.1) | number:0}}</td>
+							   <td ng-init="$parent.total_basic_premium = ($parent.total_basic_premium+(q.basic_p*1))">{{q.basic_p | number:0}}</td>
+							   <td ng-init="$parent.total_stamp_duty = ($parent.total_stamp_duty+(q.stamp_duty*1))">{{q.stamp_duty | number:0}}</td>
+							   <td ng-init="$parent.total_sticker_fees = ($parent.total_sticker_fees+(q.sticker_fees*1))">{{q.sticker_fees | number:0}}</td>
+							   <td ng-init="$parent.total_levy = ($parent.total_levy+(q.training_levy*1))">{{q.training_levy | number:0}}</td>
+							   <td ng-init="$parent.total_vat = ($parent.total_vat+(((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1))*0.18))">{{((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1))*0.18 | number:0}}</td>
+							   <td ng-init="$parent.total_premium = ($parent.total_premium+(((q.basic_p*1)+(q.stamp_duty*1)+(q.sticker_fees*1) + (((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1))*0.18) + (q.training_levy*1))))">{{(q.basic_p*1)+(q.stamp_duty*1)+(q.sticker_fees*1) + (((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1))*0.18) + (q.training_levy*1) | number:0}}</td> 
+							   <td>{{q.currency}}</td>
+							   <td>
+								<div dropdown="dropdown" class="input-group-btn">
+									   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+									   </button>
+									   <ul class="dropdown-menu"> 
+										  <li><a ui-sref="app.loadinvoice({invoice_id:'{{q.invoice_id}}'})">Details</a>
+										  </li> 
+										  <li class="divider"></li>
+										  <li><a href="#">close</a>
+										  </li>
+									   </ul>
+									</div>
+							</td>
+							</tr>
+							 <tr ng-show="!userStickers">
+							 <td colspan=18>No data!!</td>
+							 </tr>
+						 </tbody>
+						 <tfoot>
+						 <td colspan=9>Grand Totals</td> 
+						 <th>{{total_commission | number:0 }}</th>
+						 <th>{{total_basic_premium | number:0 }}</th>
+						 <th>{{total_stamp_duty | number:0 }}</th>
+						 <th>{{total_sticker_fees | number:0 }}</th>
+						 <th>{{total_levy | number:0 }}</th>
+						 <th>{{total_vat | number:0 }}</th>
+						 <th>{{total_premium | number:0 }}</th> 
+						 <td colspan=2>UGX</td>
+						 </tfoot> 
+					  </table>
+		 
+		 </div>
+		 </div>
+		 </div>
+		 </div>
+		 </div> 
+         
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+           
+				
+</form>
+ 
+
+</div>
+</body>
+</html>

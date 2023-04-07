@@ -1,0 +1,73 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.users.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">Managing Users</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="UserCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">User Lists</h5>
+			 
+			<div class="row"> 
+					<div class="panel panel-white">
+						<br/>
+						 <div class="form-group"> 
+							<div class="col-sm-8"><input type="text" class="form-control" ng-model="search" name="search" placeholder="Search Users..."/></div>
+						 
+						</div>
+						<br/>
+						<div class="panel-body">
+						<div class="table-responsive">
+							  <table data-ng-table="tableParams" show-filter="false" class="table table-bordered table-striped">
+							 <tbody>
+								<tr data-ng-repeat="d in $data">
+									<td data-title="'Action'" ng-show="role=='admin' || role=='organisation' || role=='super_agent' ||  role=='thirdparty_admin'" >
+									   <div dropdown="dropdown" class="input-group-btn">
+											   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+											   </button>
+											   <ul class="dropdown-menu"> 
+												  
+												  <li><a ui-sref="app.loadusertargets({user_id:'{{d.user_id}}'})" style="cursor:pointer">Targets</a>
+												  </li>
+												  <li><a  ng-click="editUser(d.user_id)" style="cursor:pointer">Edit</a>
+												  </li> 
+												  <li><a  ng-click="deleteUser(d.user_id)" style="cursor:pointer">Delete</a>
+												  </li> 
+												  <li class="divider"></li>
+												  <li><a href="#" style="cursor:pointer">close</a>
+												  </li>
+											   </ul>
+											</div>
+									</td>
+								   <td data-title="'#'" >{{$index+1}}</td>
+								   <td data-title="'License No'" sortable="'license_no'" >{{d.license_no}}</td>
+								   <td data-title="'Name'" sortable="'name'" >{{d.name}}</td>
+								   <td data-title="'Gender'" sortable="'gender'" >{{d.gender | uppercase}}</td> 
+								   <td data-title="'Email'" sortable="'email'" >{{d.email}}</td>
+								   <td data-title="'National ID No'" sortable="'NIN'" >{{d.NIN}}</td>
+								   <td data-title="'Contact'" sortable="'telephone'">{{d.telephone}}</td>
+								   <td data-title="'Role'" sortable="'role'">{{d.role}}</td> 
+								   <td data-title="'Branch Name'" sortable="'branch_name'">{{d.branch_name}}</td>
+								   <td data-title="'Status'" sortable="'status'"><span ng-show="d.status==1" class="label label-success">Active</span><span ng-show="d.status==0" class="label label-danger">Inactive</span></td>
+								   <!--<td data-title="'Actions'" ng-show="role=='admin' || role=='organisation' || role=='super_agent' ||  role=='thirdparty_admin'" ><button class="btn btn-primary" ng-click="editUser(d.user_id)" >Edit</button><button class="btn btn-danger" ng-click="deleteUser(d.user_id)">Delete</button></td>-->
+								</tr>
+							 </tbody>
+						  </table>
+						</div>
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

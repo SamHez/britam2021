@@ -1,0 +1,91 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.thirdparty.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">Managing Thirdparty Policies</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="stickerCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Sticker Lists</h5> 
+			<div class="row"> 
+					<div class="panel panel-white">
+						<br/>
+						 <div class="form-group"> 
+							<div class="col-sm-8"><input type="text" class="form-control" ng-model="search" name="search" placeholder="Search stickers"/></div>
+						 
+						</div>
+						<br/>
+						<div class="panel-body">
+						<div class="table-responsive">
+							<table data-ng-table="tableParams" class="table table-bordered table-striped">
+								<tbody>
+								   <tr data-ng-repeat="q in $data | filter: search">
+									  <td data-title="'Action'">
+									   <div dropdown="dropdown" class="input-group-btn">
+											   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+											   </button>
+											   <ul class="dropdown-menu" ng-show="q.status != 'deleted'"> 
+												  <li><a ui-sref="app.stickers.loadinvoice({invoice_id:'{{q.invoice_id}}'})" style="cursor:pointer">Details</a>
+												  </li> 
+												  <li><a ui-sref="app.stickers.renewinvoice({invoice_id:'{{q.invoice_id}}'})" style="cursor:pointer">Renew</a>
+												  </li> 
+												  <!-- <li><a href="#" ng-click="loadRSticker(q.invoice_detail_id)" style="cursor:pointer">Replace</a> -->
+												  <!-- </li>  -->
+												  <li><a ng-click="cancelInvoice(q.invoice_id)" style="cursor:pointer">Cancel</a>
+												  </li>
+												  <li><a ng-click="deleteInvoice(q.invoice_id)" style="cursor:pointer">Delete</a>
+												  </li>
+												  <li class="divider"></li>
+												  <li><a href="#" style="cursor:pointer">close</a>
+												  </li>
+											   </ul>
+											   <ul class="dropdown-menu" ng-show="q.status == 'deleted'"> 
+												  <li>MTP sticker deleted
+												  </li> 
+												  
+											   </ul>
+											</div>
+									  </td>
+									  <td data-title="'Client'"  sortable="'client_name'"> {{q.client_name}} 
+									  <!-- <a ui-sref="app.loadquote({quote_id:'{{q.fire_quote_id}}',qclass:'{{q.quote_class}}'})" ng-show="q.quote_class=='Fire'" >{{q.client_name}}</a> -->
+									  </td>
+									  <td data-title="'Category'"  sortable="'iclass'">{{q.iclass | uppercase}}</td>
+									  <td data-title="'Total Premium'"  class="text-red text-bold" ng-show="q.iclass=='thirdparty' || q.iclass=='comprehensive' || q.iclass=='enhanced'">{{(q.basic_premium*1)+(((q.basic_premium*1)+(q.training_levy*1)+(q.sticker_fees*1))*0.18)+(q.sticker_fees*1)+(q.training_levy*1)+ (q.stamp_duty*1) | number:0}} {{q.currency}}</td>
+									  <td data-title="'Total Premium'"  class="text-red text-bold" ng-show="q.iclass=='transit'">{{(q.basic_premium*0.2)+(((q.basic_premium*0.2)+(q.training_levy*1)+(q.sticker_fees*1))*0.18)+(q.sticker_fees*1)+(q.training_levy*1)+ (q.stamp_duty*1) | number:0}} {{q.currency}}</td>
+									  <td data-title="'Total Premium'"  class="text-red text-bold" ng-show="q.iclass=='newimport'">{{(q.basic_premium*1)+(((q.basic_premium*1)+(q.training_levy*1)+(q.sticker_fees*1))*0.18)+(q.sticker_fees*1)+(q.training_levy*1) | number:0}} {{q.currency}}</td>
+									  
+									  <td data-title="'Payment Method'"  sortable="'payment_method'">{{q.payment_method}}</td>
+									  <td data-title="'Currency'"  sortable="'currency'">{{q.currency}}</td>
+									  <td data-title="'Agent'"  sortable="'agent_details'">{{q.agent_details}}</td>
+									  <td data-title="'Status'"  sortable="'status'">
+									  <label class="label label-primary" ng-show="q.status=='new'">New</label>
+									  <label class="label label-warning" ng-show="q.status=='cancelled'">Cancelled</label>
+									  <label class="label label-danger" ng-show="q.status=='deleted'">Deleted</label>
+									  <label class="label label-default" ng-show="q.status=='replaced'">Replaced</label>
+									  <label class="label label-danger" ng-show="q.status=='completed'">Expired</label>
+									  <label class="label label-primary" ng-show="q.status=='renewal'">Renewed</label>
+									  <label class="label label-success" ng-show="q.status=='paid'">Paid</label>
+									  </td>
+									  <td data-title="'Created At'" sortable="'t'">{{q.t}}</td>
+									  
+								   </tr>
+								</tbody>
+							 </table>   
+						</div>
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

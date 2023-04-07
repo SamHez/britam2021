@@ -1,0 +1,69 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.claims.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">Claim Notifications</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="claimsCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Claims</h5>
+			 
+						<div class="panel-body"> 
+				<div class="table-responsive">
+				 <table data-ng-table="tableParams" export-csv="csv" class="table table-bordered table-striped">
+							<tbody>
+							   <tr data-ng-repeat="q in $data">
+								  <td data-title="'Actions'">
+								  <div dropdown="dropdown" class="input-group-btn">
+										   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+										   </button>
+										   <ul class="dropdown-menu"> 
+											  <li><a ui-sref="app.loadclaimnotification({claim_reference:'{{q.claim_ref}}'})" style="cursor:pointer">View Notification</a>
+											  </li>
+											  <li><a ui-sref="app.claimsettlement({claim_reference:'{{q.claim_ref}}'})" >Claim Settlement</a>
+											  </li>
+											  <li><a>View Settlement</a>
+											  </li>  
+											  <li><a style="cursor:pointer">Cancel</a>
+											  </li>
+											  <li><a style="cursor:pointer">Delete</a>
+											  </li>
+											  <li class="divider"></li>
+											  <li><a href="#" style="cursor:pointer">close</a>
+											  </li>
+										   </ul>
+								  </div>
+								  </td>
+								  <td data-title="'Claim Notification Ref'" sortable="'claim_ref'">{{q.claim_ref}}</td> 
+								  <td data-title="'Claimant Details'" sortable="'claimant_name'">{{q.claimant_name}} {{q.claimant_email}}</td>
+								  <td data-title="'Date of Incident'"  class="text-danger text-bold" sortable="'date_of_incident'">{{q.date_of_incident}}</td>
+								  <td data-title="'Number Plate'" sortable="'number_plate'">{{q.number_plate}}</td>
+								  <td data-title="'Sticker No'" sortable="'sticker_no'">{{q.sticker_no}}</td>  
+								  <td data-title="'Claim Estimate'" sortable="'claim_estimate'">{{q.claim_estimate | number}} UGX</td>
+								  <td data-title="'Status'" sortable="'status'"><div class="label label-orange" ng-show="q.status=='Cancelled'">Cancelled</div><div class="label label-success" ng-show="q.status=='Settled'">Settled</div><div class="label label-success" ng-show="q.status=='Settled'">Settled</div><div class="label label-default" ng-show="q.status=='Draft'">Draft</div></td>
+								  <!-- <td data-title="'Date Reported'">{{q.date_reported}}</td> -->
+								  
+							   </tr>
+							</tbody>
+						 </table>
+ 
+ 
+ 
+ 						</div>
+ 						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

@@ -1,0 +1,151 @@
+ <html>
+<head> 
+
+</head>
+<body>
+<style media="print"> 
+
+    @media print { 
+	
+	@page {     
+	size: A4;
+	size: portrait; 
+    
+	}
+	   
+	 #print-content1, #print-content1 * {
+        visibility:visible; 
+		margin-top: -19mm !important;
+		font-family: "Arial";
+		font-color:#0000;
+		font-size: 1em; 
+		font-weight: 900;
+		line-height: 1.3;    
+    }
+       
+	 #print-content2, #print-content2 * {
+        visibility:visible; 
+		margin-top: 57mm !important;
+		font-family: "Arial";
+		font-color:#0000;
+		font-size: 1em; 
+		font-weight: 900;
+		line-height: 1.3;    
+    }
+     
+	.name { position:absolute; top:2.1cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.policy_no { position:absolute; top:2.5cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.reg_no { position:absolute; top:2.9cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.seat { position:absolute; top:3.3cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.gross_weight { position:absolute; top:3.8cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.chassis { position:absolute; top:4.2cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.premium { position:absolute; top:4.6cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.start_date { position:absolute; top:5cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.end_date { position:absolute; top:5.4cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.issuing_co { position:absolute; top:5.8cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.issuing_officer { position:absolute; top:6.3cm; left:3.2cm; width:7.3cm; height:0.5cm; }
+	.issuing_officer_signiture { position:absolute; top:6.3cm; left:8.4cm; width:1.9cm; height:0.5cm; }
+	
+} 
+</style>
+<div class="modal-header">
+<a class="close" data-dismiss="alert" aria-label="close" ng-click="close()"><i class="fa fa-times"></i></a>
+<h3 class="modal-title"><i class="fa fa-print"></i> Print Fleet Sticker</h3> 
+</div>
+<div class="modal-body">
+
+<form class="form-horizontal" enctype="multipart/form-data" name="pay">
+		 
+		 
+         
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+	
+		 
+		 <div > 
+		 <div class="form-group">
+		 <label class="col-sm-3 control-label hidden-print">print preview</label>
+		 <div class="col-sm-9">
+		 <div>
+		 <table border=0  id="print-content{{$index+1}}" style="width:112mm;height:76mm" ng-repeat="d in data track by $index">
+		 <tr>
+		 <td rowspan=3></td>
+		 <td colspan=7></td>   <!--THE REPUBLIC OF UGANDA-->
+		 </tr>
+		 <tr>
+		 <td colspan=7></td>  <!-- MOTOR TRANSIT -->
+		 </tr>
+		 <tr>
+		<td colspan=7></td>   <!--  MTP CERTIFICATE OF INSURANCE-->
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Name of Policyholder:-->
+		 <td colspan=4 class="name">{{d.client_name | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Policy No:-->
+		 <td colspan=4 class="policy_no">{{d.policy_no | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		<td colspan=4></td>  <!-- Reg. NO & MAKE:  -->
+		 <td colspan=4 class="reg_no">{{d.vehicle_plate_no | uppercase}} {{d.vehicle_make | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!--  Seating Capacity:-->
+		 <td colspan=4 class="seat">{{d.vehicle_no_seats}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Gross Weight:-->
+		 <td colspan=4 class="gross_weight">{{d.gross_weight}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!-- Chasis No: -->
+		 <td colspan=4 class="chassis">{{d.vehicle_chasis_no | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		  <td colspan=4></td>   <!--Premium Charged:-->
+		 <td colspan=4 class="premium">{{d.total_amount | number:0}}{{d.currency}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!-- Start Date/Time: -->
+		 <td colspan=4 class="start_date">{{d.start_date}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td> <!-- End Date/Time:  -->
+		 <td colspan=4 class="end_date">{{d.end_date}}</td>  
+		 </tr>
+		 <tr>
+		  <td colspan=4></td><!--Issuing Company   -->
+		 <td colspan=4 class="issuing_co">{{d.organ_name | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		<td colspan=4></td>   <!-- Issuing Officer: -->
+		 <td class="issuing_officer">{{d.agent_details | uppercase}}</td>  
+		  <!-- <td></td>  <!-- Signiture--> 
+		 <td class="issuing_officer_signiture">{{d.agent_details | lowercase | limitTo: 6}}</td>  
+		 </tr>
+		 </table>
+		 </div>
+		 
+		 
+		 </div>
+		 </div>
+		 </div>
+		<!-- {{data | json}}	 -->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						 
+						<button class="btn btn-danger" onclick="window.print();">
+							<i class="fa fa-print"></i> Print Sticker
+						</button> 
+						<!-- {{data | json}} -->
+					</div>
+				</div>   
+				
+</form>
+ 
+
+</div>
+</body>
+</html>

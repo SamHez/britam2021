@@ -1,0 +1,176 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.thirdparty.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">Renew thirdparty sticker</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: INVOICE -->
+<div  ng-controller="stickerCtrl"> 
+
+<div class="container-fluid container-fullw bg-white" ng-repeat="q in invoiceDetails" >
+	<div class="row">
+	<form class="form-horizontal" enctype="multipart/form-data" method="post" name="register" >
+	 <div class="col-md-12 pv">
+	 <div class="alert alert-info">
+				Select renewal start date and submit policy
+			</div> 
+					<fieldset>
+								 <h6><u>Policy period</u></h6>
+								   <div class="form-group" ng-controller="DatepickerDemoCtrl">
+									  <label class="col-sm-2 control-label">Start Date</label>
+									  <div class="col-sm-10">
+									   <input type="text" class="form-control" ng-click="endOpen = !endOpen" datepicker-popup="" name="start_date" ng-model="start_date" is-open="endOpen" ng-init="endOpen = false" min-date="start_date" close-text="Close" required />
+			
+									  </div>
+								   </div>
+								   
+					</fieldset>
+						  <!-- {{start_date}} -->
+	</div>
+		<div class="col-md-12">
+			<div class="invoice"> 
+				<hr>
+				<div class="row">
+					<div class="col-sm-4 pull-left">
+						<h4></h4>
+						<div class="well">
+							<address>
+								<strong class="text-dark">{{q.organ_name}}</strong>
+								<br>
+								{{q.organ_address}}
+								<br>
+								<abbr title="Contacts">C:</abbr> {{q.organ_contact}}
+							</address>
+							 
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<h4></h4>
+						<div class="padding-bottom-30 padding-top-10 text-dark well">
+							To {{q.client_name}}
+							<br>
+							<address>
+									  {{q.client_address}}
+								 <br/>{{q.client_email}}
+							</address>
+						   </div> 
+					</div>
+					<div class="col-sm-4 pull-right">
+						<h4></h4>
+						<ul class="list-unstyled invoice-details padding-bottom-30 padding-top-10 text-dark well">
+							<li>
+								<strong>Start Date</strong> {{q.start_date | date:"dd/MM/yyyy"}}
+							</li>
+							<li>
+								<strong>End Date</strong> {{q.end_date | date:"dd/MM/yyyy"}}
+							</li> 
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+				
+				
+
+					<div class="col-sm-12">
+						<table class="table table-striped">
+							<thead>
+								<thead>
+								 <tr>
+									<th>
+									   <p>Motor Type</p> 
+									</th>
+									<th>
+									   <p>Chassis No</p> 
+									</th>
+									
+									<th>
+									   <p>No Plate</p> 
+									</th>
+									<th>
+									   <p>No of seats</p> 
+									</th>
+									<th>
+									   <p>Power(in CC)</p> 
+									</th>  
+									<th>
+									   <p>Use</p> 
+									</th> 
+								 </tr>
+							  </thead>
+							</thead>
+							<tbody>
+								<tr ng-repeat="d in q.motor_thirdparty_details" ng-init="q.no_cars=($index+1)">
+								 <td>{{d.vehicle_category}} {{d.vehicle_make}}</td> 
+								 <td>{{d.vehicle_chasis_no}}</td> 
+								 <td>{{d.vehicle_plate_no}}</td> 
+								 <td>{{d.vehicle_no_seats}}</td> 
+								 <td>{{d.vehicle_cc}}</td>   
+								 <td>{{d.vehicle_use}}</td>    
+								 
+							</tr> 
+						</tbody>
+					</table>
+				<table class="table">
+				  <thead>
+					 <tr>
+						<th colspan=10><u>Cost of Insurance:</u></th>
+						 
+					 </tr>
+				  </thead>
+				  <tbody> 
+					  
+					  <tr>
+						<th>
+						   <p>Total Premium :</p> 
+						</th>
+						<td>{{(q.basic_premium*1)+(((q.basic_premium*1)+(q.training_levy*1)+(q.sticker_fees*1))*0.18)+(q.sticker_fees*1)+(q.training_levy*1)+(q.stamp_duty*1) | number:0}} {{q.currency}}</td> 
+					 </tr>
+					  
+					  
+					   
+				  </tbody>
+			   </table>
+				 </div>
+				 
+				
+					
+				</div>
+				<div class="row">
+				<div class="row bt"> 
+				   <div class="col-xs-12">
+					  <p><span> 
+					  <strong>Prepared by {{q.agent_details}}</strong> 
+					  </span></p>
+				   </div>
+				</div> 
+					<div class="col-sm-12 invoice-block">
+						<!-- <ul class="list-unstyled amounts text-small"> -->
+							<!-- <li> -->
+								<!-- <strong>Sub-Total:</strong> $12,876 -->
+							<!-- </li> -->
+							<!-- <li> -->
+								<!-- <strong>Discount:</strong> 9.9% -->
+							<!-- </li> -->
+							<!-- <li> -->
+								<!-- <strong>VAT:</strong> 22% -->
+							<!-- </li> -->
+							<!-- <li class="text-extra-large text-dark margin-top-15"> -->
+								<!-- <strong >Total:</strong> $11,400 -->
+							<!-- </li> -->
+						<!-- </ul> -->
+						<!-- <br> --> 
+					<button type="button"  class="btn btn-success pull-right" ng-click="renew_Policy(q,start_date)" ng-disabled="register.$invalid"><i class="fa fa-chevron-circle-right"></i> Renew Policy</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+</div>
+<!-- end: INVOICE -->

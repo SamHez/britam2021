@@ -1,0 +1,167 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Agent Issued Sticker Reports</h1>
+			<span class="mainDescription">Agent Issued Sticker Reports</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: RESPONSIVE TABLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="AgentStickerReportsCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Agent Issued Sticker Reports</span></h5> 
+			<div class="alert alert-info">
+				Select date range and click submit to load monthly revenue reports
+			</div> 
+			 
+			<div class="row">
+			<div class="col-md-6"> 
+				<div class="input-group" ng-controller="DatepickerDemoCtrl">
+					<input type="text" class="form-control" ng-focus="open()" placeholder="Select date from"  datepicker-popup="yyyy/MM/dd" ng-model="data.start" name="start"  is-open="startOpened" ng-init="startOpened = false" min-date="'1970-12-31'" max-date="data.end" ng-required="true" close-text="Close"  ng-click="startOpen($event)"/>
+					<span class="input-group-addon">to</span>
+					<input type="text" class="form-control" ng-focus="open()" placeholder="Select date to"  datepicker-popup="yyyy/MM/dd" ng-model="data.end" name="end" is-open="endOpened" ng-init="endOpened = false" min-date="data.start" max-date="'2065-06-22'" ng-required="true" close-text="Close"  ng-click="endOpen($event)" />
+						 			
+			    </div>
+			  </div>
+			  <!-- {{data | json}} -->
+			  <div class="col-md-3">
+			  <!-- <h5 class="text-bold margin-top-25 margin-bottom-15">.</h5> -->
+			   <div class="input-group">
+			    <button class="btn btn-primary" ng-click="load_agent_report(data)">Submit</button>
+			   </div>
+			  </div>
+			  <div class="col-md-3">
+			  <!-- <h5 class="text-bold margin-top-25 margin-bottom-15">.</h5> -->
+			   <div class="input-group">
+			    <div class="btn-group" dropdown>
+					<button type="button" class="btn btn-primary">
+						<i class="ti-download"></i> Export Report
+					</button>
+					<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+						<span class="caret"></span>
+						<span class="sr-only">Split button!</span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<!-- <li> -->
+							<!-- <a ng-click="exportAction('pdf')"> -->
+								<!-- PDF -->
+							<!-- </a> -->
+						<!-- </li> -->
+						<li>
+							<a ng-click="exportAction('doc')">
+								DOC
+							</a>
+						</li>
+						<li>
+							<a ng-click="exportAction('csv')">
+								CSV
+							</a>
+						</li> 
+						<li>
+							<a ng-click="exportAction('excel')">
+								Excel
+							</a>
+						</li>
+					</ul>
+				</div>
+			   </div>
+			  </div>
+			</div>
+			<p>
+						  </p>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped export-table">
+                     <thead> 
+					 <tr> 
+							   <th colspan=25 text-align="center">Sticker Report from {{data.start | date:"fullDate"}} to {{data.end | date:"fullDate"}}</th> 
+						 
+					 </tr>
+                        <tr>
+							<th>Policy Holder</th>
+							<th>Reg No</th>
+							<th>Car Make</th>
+							<th>Seating capacity</th>
+							<th>G.weight</th>
+							<th>Sticker No</th>
+							<th>Category of Sticker</th>
+							<th>Type of Cover</th>
+							<th>Start Date</th>
+							<th>End Date</th>
+							<th>Validity</th>
+							<th>Basic premium</th>
+							<th>Training Levy</th> 
+							<th>Sticker Fees</th>  
+							<th>VAT Charge(18%)</th>  
+							<th>Stamp Duty</th> 
+							<th>Gross Commission</th> 
+							<!-- <th>Issuing Branch</th>  -->
+							<!-- <th>Issuing Officer</th>  -->
+							<th>Total Premium</th> 
+							<th>Net Commision</th>
+							<!-- <th>IRA Levy(1.5%)</th> -->
+							<!-- <th>Withholding Tax(6%)</th> -->
+							<th>Currency</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr data-ng-repeat="q in agentstickers">
+                           <td>{{q.client_name}}</td>
+							   <td>{{q.vehicle_plate_no}}</td>
+							   <td>{{q.vehicle_make}}</td>
+							   <td>{{q.vehicle_no_seats}}</td> 
+							   <td>{{q.gross_weight}}</td>  
+							   <td>{{q.sticker_no}}</td> 
+							   <td>{{q.vehicle_category}}</td>							   
+							   <td>
+							   <span ng-show="q.iclass=='thirdparty'">MTP</span>
+							   <span ng-show="q.iclass=='comprehensive'">COMPREHENSIVE</span>
+							   <span ng-show="q.iclass=='enhanced'">ENHANCED</span>
+							   </td>
+							   <!-- <td>{{q.organ_name}}</td>  --> 
+							   <td>{{q.start_date}}</td>
+							   <td>{{q.end_date}}</td> 
+							   <td>{{q.validity | uppercase }} YR(s)</td> 
+							   <td ng-init="$parent.total_basic_premium = ($parent.total_basic_premium+(q.basic_p*1))">{{q.basic_p | number:0}}</td> 
+							   <td ng-init="$parent.total_levy = ($parent.total_levy+(q.training_levy*1))">{{q.training_levy | number:0}}</td>
+							   <td ng-init="$parent.total_sticker_fees = ($parent.total_sticker_fees+(q.sticker_fees*1))">{{q.sticker_fees | number:0}}</td>
+							   <td ng-init="$parent.total_vat = ($parent.total_vat+(((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1))*0.18))">{{((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1))*0.18 | number:0}}</td>
+							   <td ng-init="$parent.total_stamp_duty = ($parent.total_stamp_duty+(q.stamp_duty*1))">{{q.stamp_duty | number:0}}</td>
+							   <td ng-init="$parent.total_commission = ($parent.total_commission+(q.basic_p*0.1))">{{(q.basic_p*0.1) | number:0}}</td> 
+							   <!-- <td>{{q.branch}}</td> -->
+							   <!-- <td>{{q.agent_details}}</td>							    -->
+							   <td ng-init="$parent.grand_premium = ($parent.grand_premium+((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1)+(((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1))*0.18)))">{{(q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1)+(((q.basic_p*1)+(q.training_levy*1)+(q.sticker_fees*1)+(q.stamp_duty*1))*0.18) | number:0}}</td>
+							   <td ng-init="$parent.grand_netcommision = ($parent.grand_netcommision+((q.basic_p*0.1)-(q.basic_p*0.015)-(q.basic_p*0.06)))">{{(q.basic_p*0.1)-(q.basic_p*0.015)-(q.basic_p*0.06) | number:0}}</td>
+							   <!-- <td ng-init="$parent.total_IRA = ($parent.total_IRA+(q.basic_p*0.015))">{{(q.basic_p*0.015 | number:0)}}</td>  -->
+							   <!-- <td ng-init="$parent.total_withholding = ($parent.total_withholding+(q.basic_p*0.06))">{{(q.basic_p*0.06 | number:0)}}</td>  -->
+							   <td>{{q.currency}}</td>
+                        </tr>
+                         
+                     </tbody>
+					 <tfoot>
+						 <th colspan=11>Grand Totals</th> 
+						 <th>{{total_basic_premium | number:0 }}</th>
+						 <th>{{total_levy | number:0 }}</th>
+						 <th>{{total_sticker_fees | number:0 }}</th>
+						 <th>{{total_vat | number:0 }}</th>
+						 <th>{{total_stamp_duty | number:0 }}</th> 
+						 <th>{{total_commission | number:0 }}</th> 
+						 <!-- <th colspan=2></th>   -->
+						 <th>{{grand_premium | number:0 }}</th> 
+						 <th>{{grand_netcommision | number:0 }}</th> 
+						 <!-- <th>{{total_IRA | number:0 }}</th>  -->
+						 <!-- <th>{{total_withholding | number:0 }}</th>  -->
+						 <td>UGX</td> 
+					</tfoot> 
+                  </table>
+			</div> 
+			
+			 
+			
+		</div>
+	</div>
+</div>
+<!-- end: RESPONSIVE TABLE -->

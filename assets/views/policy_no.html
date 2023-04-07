@@ -1,0 +1,70 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.thirdparty.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">Managing Policy Nos</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="PolicyNoController">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Policy No Lists</h5> 
+			<div class="row"> 
+					<div class="panel panel-white">
+					 
+					   <div class="form-group"> 
+						  <div class="col-sm-12">
+							 <button class="btn btn-default" ng-click="add_Policy(0)">Add Policy No</button>
+						  </div>
+					   </div>
+					 
+			   
+						<br/>
+						 <div class="form-group"> 
+							<div class="col-sm-8"><input type="text" class="form-control" ng-model="search" name="search" placeholder="Search no..."/></div>
+						 
+						</div>
+						<br/>
+						<div class="panel-body">
+						<div class="table-responsive">
+							 <table data-ng-table="tableParams" class="table table-bordered table-striped">
+								<tbody>
+								   <tr data-ng-repeat="q in $data | filter: search">
+									 <td data-title="'Action'">
+									   <div dropdown="dropdown" class="input-group-btn">
+											   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+											   </button>
+											   <ul class="dropdown-menu">    
+												  <li><a ng-click="cancelInvoice(q.invoice_id)" style="cursor:pointer">Edit</a>
+												  </li>
+												  <li><a ng-click="deleteInvoice(q.invoice_id)" style="cursor:pointer">Delete</a>
+												  </li>
+												  <li class="divider"></li>
+												  <li><a href="#" style="cursor:pointer">close</a>
+												  </li>
+											   </ul>
+											</div>
+									  </td>
+									  <td data-title="'Policy No'" sortable="'sticker_no'">{{q.policy_no}}</td>  
+									  <td data-title="'Status'" sortable="'sticker_no'">{{q.status}}</td> 
+									  <td data-title="'Created At'" sortable="'sticker_no'">{{q.t }}</td>
+									  
+								   </tr>
+								</tbody>
+							 </table>
+						</div>
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

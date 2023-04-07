@@ -1,0 +1,108 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.thirdparty.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">Managing Policy Nos and Sticker Nos</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="StickerController">
+	<div class="row">
+	<div class="col-sm-12">
+								<div class="panel panel-white" id="panel6">
+									<div class="panel-heading">
+										<h4 class="panel-title text-primary">Available Stickers</h4>
+										<ct-paneltool class="panel-tools" tool-refresh="load1"></ct-paneltool>
+									</div>
+									<div class="panel-body">
+										<div class="panel-scroll height-80" perfect-scrollbar wheel-propagation="false" suppress-scroll-x="true">
+											<p>
+											
+											<table class="table">
+											 <tr>
+												<th>Category</th>
+												<th>Sticker Nos</th>
+												<th>Total No Received</th>
+												<th>Status</th>
+											 </tr>
+											 
+											 <tbody>
+											 <tr ng-repeat="x in stickernos">
+												<td>{{x.category}}</td>
+												<td>[<span class="text-red">{{x.sticker_no_from}} - {{x.sticker_no_to}}</span>]</td>
+												<td>{{x.total_amount_received | number:0}}</td>
+												<td>{{x.status | uppercase}}</td>
+											 </tr>
+											 </tbody>
+											</table>
+												
+											</p>
+											 
+										</div>
+									</div>
+								</div>
+							</div>
+							
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Sticker No & Policy No Lists</h5> 
+			<div class="row"> 
+					<div class="panel panel-white">
+					 
+					   <div class="form-group"> 
+						  <div class="col-sm-12">
+							 <button class="btn btn-default" ng-click="add_Sticker(0)">Assign Sticker No</button>
+						  </div>
+					   </div>
+					 
+			   
+						<br/>
+						 <div class="form-group"> 
+							<div class="col-sm-5"><input type="text" class="form-control" ng-model="search" name="search" placeholder="Search no..."/></div>
+							
+						</div>
+						<br/>
+						<div class="panel-body">
+						<div class="table-responsive">
+							 <table data-ng-table="tableParams" class="table table-bordered table-striped">
+								<tbody>
+								   <tr data-ng-repeat="q in $data | filter: search">
+									   <td data-title="'Action'">
+									   <div dropdown="dropdown" class="input-group-btn">
+											   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+											   </button>
+											   <ul class="dropdown-menu">    
+												  <li><a ng-click="cancelInvoice(q.invoice_id)" style="cursor:pointer">Edit</a>
+												  </li>
+												  <li><a ng-click="deleteInvoice(q.invoice_id)" style="cursor:pointer">Delete</a>
+												  </li>
+												  <li class="divider"></li>
+												  <li><a href="#" style="cursor:pointer">close</a>
+												  </li>
+											   </ul>
+											</div>
+									</td>
+									  <td data-title="'Sticker No'" sortable="'sticker_no'">{{q.sticker_no}}</td> 
+									  <td data-title="'Policy No'" sortable="'policy_no'">{{q.policy_no}}</td> 
+									  <td data-title="'Category'" sortable="'category'">{{q.category}}</td> 
+									  <td data-title="'Agent'" sortable="'agent'">{{q.agent}}</td> 
+									  <td data-title="'Status'" sortable="'status'">{{q.status}}</td> 
+									  <td data-title="'Created At'" sortable="'t'">{{q.t}}</td>
+									  
+								   </tr>
+								</tbody>
+							 </table>
+						</div>
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

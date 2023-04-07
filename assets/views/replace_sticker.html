@@ -1,0 +1,175 @@
+ <html> 
+<head>
+</head>
+<body>
+<style media="print"> 
+
+    @media print { 
+	
+	@page {     
+	size: A4;
+	size: portrait; 
+    
+	}
+	   
+	 	
+	 #print-content, #print-content * {
+        visibility:visible; 
+		margin-top: -10mm !important;
+		font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+		font-color:#0000;
+		font-size: 1em; 
+		font-weight: 900;
+		line-height: 1;   
+		 
+    } 
+	.name { position:absolute; top:2.1cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.policy_no { position:absolute; top:2.5cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.reg_no { position:absolute; top:3.0cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.seat { position:absolute; top:3.4cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.gross_weight { position:absolute; top:3.8cm; left:2.5cm; width:7.3cm; height:0.6cm; }
+	.chassis { position:absolute; top:4.2cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.premium { position:absolute; top:4.65cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.start_date { position:absolute; top:5.1cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.end_date { position:absolute; top:5.5cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.issuing_co { position:absolute; top:5.9cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.issuing_officer { position:absolute; top:6.3cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.issuing_officer_signiture { position:absolute; top:6.3cm; left:7.8cm; width:1.9cm; height:0.6cm;} 
+}  
+</style>
+<div class="modal-header hidden-print">
+<a class="close" data-dismiss="alert" aria-label="close" ng-click="close()"><i class="fa fa-times"></i></a>
+<h3 class="modal-title"><i class="fa fa-print"></i> Replace Sticker #{{data.invoice_detail_id}}</h3> 
+</div>
+<div class="modal-body">
+
+<form class="form-horizontal" enctype="multipart/form-data" name="pay">
+			 
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+		
+		
+        <input type="hidden" class="form-control" ng-model="data.invoice_detail_id" required />
+		 
+		 <div > 
+		 <div class="form-group">
+		 <label class="col-sm-3 control-label hidden-print">print preview</label>
+		 <div class="col-sm-9">		 <div>
+		 <table id="print-content">
+		 <tr>
+		 <td rowspan=3></td>
+		 <td colspan=7></td>   <!--THE REPUBLIC OF UGANDA-->
+		 </tr>
+		 <tr>
+		 <td colspan=7></td>  <!-- MOTOR TRANSIT -->
+		 </tr>
+		 <tr>
+		<td colspan=7></td>   <!--  MTP CERTIFICATE OF INSURANCE-->
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Name of Policyholder:-->
+		 <td colspan=4 class="name">{{data.client_name | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Policy No:-->
+		 <td colspan=4 class="policy_no">{{data.policy_no | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		<td colspan=4></td>  <!-- Reg. NO & MAKE:  -->
+		 <td colspan=4 class="reg_no">{{data.vehicle_plate_no | uppercase}} {{data.vehicle_make | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!--  Seating Capacity:-->
+		 <td colspan=4 class="seat">{{data.vehicle_no_seats}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Gross Weight:-->
+		 <td colspan=4 class="gross_weight">{{data.gross_weight}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!-- Chasis No: -->
+		 <td colspan=4 class="chassis">{{data.vehicle_chasis_no | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		  <td colspan=4></td>   <!--Premium Charged:-->
+		 <td colspan=4 class="premium">{{data.total_amount | number:0}}{{data.currency}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!-- Start Date/Time: -->
+		 <td colspan=4 class="start_date">{{data.start_date}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td> <!-- End Date/Time:  -->
+		 <td colspan=4 class="end_date">{{data.end_date}}</td>  
+		 </tr>
+		 <tr>
+		  <td colspan=4></td><!--Issuing Company   -->
+		 <td colspan=4 class="issuing_co">{{data.organ_name}}</td>  
+		 </tr>
+		 <tr>
+		<td colspan=4></td>   <!-- Issuing Officer: -->
+		 <td class="issuing_officer">{{data.agent_details | uppercase | limitTo: 10}}</td>  
+		  <!-- <td></td>  <!-- Signiture--> 
+		 <td class="issuing_officer_signiture">{{data.agent_details | lowercase | limitTo: 6}}</td>  
+		 </tr>
+		 </table>
+		 </div>
+		 </div>
+		 </div>
+		 </div>
+		 
+		 
+		 
+         
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+		
+		  <div class="form-group hidden-print">
+          <label class="col-sm-3 control-label">Charge</label>
+          <div class="col-sm-9">                        
+            <input type="text" readonly class="form-control" ng-model="data.charge | number:0" ng-init="data.charge=10000" />                        
+          </div>
+        </div> 
+		
+		<div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group hidden-print">
+          <label class="col-sm-3 control-label">Select Payments</label>
+          <div class="col-sm-9">
+            <div class="btn-group m-r">
+              <label class="btn btn-default" ng-model="data.payment_method" btn-radio="'cash'"><img src="assets/images/cash.jpg" height="30" width="30" />Cash</label>
+              <label class="btn btn-default" ng-model="data.payment_method" btn-radio="'mtnmobile'" ><img src="assets/images/mtn.jpg" height="30" width="30" />MTN Mobile Money</label> 
+              <label class="btn btn-default" ng-model="data.payment_method" btn-radio="'airtelmobile'" ><img src="assets/images/airtel.jpg" height="30" width="30" />Airtel Mobile Money</label> 
+              <!-- <label class="btn btn-default" ng-model="data.payment_method" btn-radio="'visa'" ><img src="app/img/visa.jpg" height="30" width="30" />VISA</label>  -->
+              <!-- <label class="btn btn-default" ng-model="data.payment_method" btn-radio="'paypal'" ><img src="app/img/paypal.jpg" height="30" width="30" />PayPal</label>  -->
+              <!-- <label class="btn btn-default" ng-model="data.payment_method" btn-radio="'master'" ><img src="app/img/mastercard.jpg" height="30" width="30" />MasterCard</label>   -->
+              <!-- <label class="btn btn-default" ng-model="data.payment_method" btn-radio="'bank'" ><img src="app/img/bank.jpg" height="30" width="30" />Bank</label>   -->
+			  <input type="text" placeholder="Enter mobile no eg 256752000111" class="form-control" ng-model="user_telephone" ng-show="data.payment_method=='mtnmobile' || data.payment_method=='airtelmobile'"/>
+			  <button class="btn btn-primary" ng-show="data.payment_method=='mtnmobile' || data.payment_method=='airtelmobile'" ng-click="initiatePay(user_telephone,data.total_amount,data.invoice_id)">Initiate Payment</button> 
+			  
+            </div>
+          </div>
+        </div> 
+		 
+         
+        <div class="line line-dashed b-b line-lg pull-in"></div> 
+          
+		<!-- {{data | json}}	 -->
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+				
+				<div class="form-group hidden-print" ng-show="data.payment_method=='cash' || data.status=='ok'">
+					<div class="col-sm-offset-3 col-sm-9">
+						 
+						<button class="btn btn-danger" onclick="window.print();" ng-disabled="pay.$invalid" ng-click="replace_stickerNo(data)">
+							<i class="fa fa-print"></i> Print Sticker
+						</button>
+						<!-- <button class="btn btn-primary"> -->
+							<!-- <i class="fa fa-dollar"></i> Update Sticker No -->
+						<!-- </button>  -->
+						<!-- {{data | json}} -->
+					</div>
+				</div>   
+				
+</form>
+ 
+
+</div>
+</body>
+</html>

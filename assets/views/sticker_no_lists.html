@@ -1,0 +1,121 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.stickers.MAIN">{{ mainTitle }}</h1>
+			<!-- <span class="mainDescription">Managing Users</span> -->
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="stickerNoCtrl">
+
+<div class="row">
+		<div class="col-sm-3">
+			<div class="panel panel-white no-radius text-center">
+				<div class="panel-body bg-success">
+					<span class="fa-stack fa-2x"><i class="fa fa-bicycle text-default"></i> </span>
+					<h5 class="StepTitle" style="color:#fff;">Motor Bikes</h5> 
+					<p class="text-small">
+						<span>{{motor_bike | number:0}}<br/></span>  
+						 
+					</p>
+					 
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3" >
+			<div class="panel panel-white no-radius text-center">
+				<div class="panel-body bg-info">
+					<span class="fa-stack fa-2x"><i class="ti-truck text-default"></i> </span>
+					<h5 class="StepTitle" style="color:#fff;">Motor Transit</h5> 
+					<p class="text-small">
+						
+						<span>{{motor_transit | number:0}}<br/></span>  
+					</p>
+					 
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="panel panel-white no-radius text-center">
+				<div class="panel-body bg-danger">
+					<span class="fa-stack fa-2x"> <i class="ti-car text-default"></i></span>
+					<h5 class="StepTitle" style="color:#fff;">Motor Private</h5> 
+					<p class="text-small"> 
+						<span>{{motor_private | number:0}}<br/></span>  
+					</p>
+					 
+				</div>
+			</div>
+		</div>
+		 
+		<div class="col-sm-3">
+			<div class="panel panel-white no-radius text-center">
+				<div class="panel-body bg-yellow">
+					<span class="fa-stack fa-2x"> <i class="fa fa-bus text-default"></i></span>
+					<h5 class="StepTitle" style="color:#fff;" >Motor Commercial</h5> 
+					<p class="text-small"> 
+						<span>{{motor_commercial | number:0}}<br/></span>  
+					</p>
+					 
+				</div>
+			</div>
+		</div>
+		 
+	</div>
+	
+
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Sticker No Lists</h5>
+			 
+			<div class="row"> 
+					<div class="panel panel-white">
+						<br/>
+						 <div class="form-group"> 
+							<div class="col-sm-8"><input type="text" class="form-control" ng-model="search" name="search" placeholder="Search Sticker No..."/></div>
+						 
+						</div>
+						<br/>
+						<div class="panel-body">
+						<div class="table-responsive">
+							  <table data-ng-table="tableParams" show-filter="false" class="table table-bordered table-striped">
+							 <tbody>
+								<tr data-ng-repeat="d in $data">
+									<td data-title="'Action'">
+									   <div dropdown="dropdown" class="input-group-btn">
+											   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+											   </button>
+											   <ul class="dropdown-menu">  
+												  <li><a  ng-click="editUser(d.user_id)" style="cursor:pointer">Edit</a>
+												  </li> 
+												  <li><a  ng-click="deleteStickerNos(d.sticker_id)" style="cursor:pointer">Delete</a>
+												  </li> 
+												  <li class="divider"></li>
+												  <li><a href="#" style="cursor:pointer">close</a>
+												  </li>
+											   </ul>
+											</div>
+									</td>
+								   <td data-title="'#'" >{{$index+1}}</td>
+								   <td data-title="'Category'" sortable="'category'" >{{d.category}}</td>
+								   <td data-title="'Sticker Nos'" sortable="'sticker_no_from'" >[<span class="text-red">{{d.sticker_no_from}} - {{d.sticker_no_to}}</span>]</td> 
+								   <td data-title="'Total No Received'" sortable="'total_amount_received'" >{{d.total_amount_received}}</td>
+								   <td data-title="'Status'" sortable="'status'">{{d.status | uppercase}}</td> 
+								  </tr>
+							 </tbody>
+						  </table>
+						</div>
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

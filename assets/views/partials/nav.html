@@ -1,0 +1,348 @@
+<!-- start: SEARCH FORM -->
+<!-- <div class="search-form"> -->
+	<!-- <a class="s-open" href="#"> -->
+		<!-- <i class="ti-search"></i> -->
+	<!-- </a> -->
+	<!-- <form class="navbar-form" role="search"> -->
+		<!-- <a class="s-remove" href="#" ng-toggle-class="search-open" target=".navbar-form"> -->
+			<!-- <i class="ti-close"></i> -->
+		<!-- </a> -->
+		<!-- <div class="form-group"> -->
+			<!-- <input type="text" class="form-control" placeholder="{{ 'sidebar.search.PLACEHOLDER' | translate }}"> -->
+			<!-- <button class="btn search-button" type="submit"> -->
+				<!-- <i class="ti-search"></i> -->
+			<!-- </button> -->
+		<!-- </div> -->
+	<!-- </form> -->
+<!-- </div> -->
+<!-- end: SEARCH FORM -->
+<!-- start: MAIN NAVIGATION MENU -->
+<div class="navbar-title hidden-print">
+	<span translate="sidebar.heading.NAVIGATION">Main Navigation</span>
+</div>
+<ul class="main-navigation-menu">
+	<li ui-sref-active="active">
+		<a ui-sref="app.dashboard">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-home"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.dashboard.MAIN"> Dashboard </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ng-class="{'active open':$state.includes('app.organisation')}" ng-if="role=='admin' || role=='thirdparty_admin'">
+		<a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-briefcase"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.organisation.MAIN"> Organisation </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active">
+				<a ui-sref="app.organisation.vieworgan">
+					<span class="title" translate="sidebar.nav.organisation.VIEW"> View Organisation </span>
+				</a>
+			</li> 
+		</ul>
+	</li>
+	<li ng-class="{'active open':$state.includes('app.clients')}">
+		<a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-id-badge"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.clients.MAIN"> Clients </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active">
+				<a ui-sref="app.clients.viewclients">
+					<span class="title" translate="sidebar.nav.clients.VIEW">View Clients</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.clients.addclients">
+					<span class="title" translate="sidebar.nav.clients.ADD">Add Clients</span>
+				</a>
+			</li> 
+		</ul>
+	</li>
+	
+	<li ng-class="{'active open':$state.includes('app.stickernos')}" ng-if="role=='admin' || role=='thirdparty_admin' ">
+		<a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-layout-cta-right"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.stickers.MAIN"> Sticker Management </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active">
+				<a ui-sref="app.stickernos.viewstickernos">
+					<span class="title" translate="sidebar.nav.stickers.VIEW">View Stickers Nos</span>
+				</a>
+			</li> 
+			<li ui-sref-active="active">
+				<a ui-sref="app.stickernos.addstickernos">
+					<span class="title" translate="sidebar.nav.stickers.ADD"> Add New Stickers No </span>
+				</a>
+			</li> 
+		</ul>
+	</li>
+	
+	<li ng-class="{'active open':$state.includes('app.stickers')}">
+		<a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-car"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.thirdparty.MAIN"> Third Party </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active">
+				<a ui-sref="app.stickers.viewstickers">
+					<span class="title" translate="sidebar.nav.thirdparty.VIEW">View Stickers</span>
+				</a>
+			</li>
+			<li ui-sref-active="active" ng-if="role != 'admin'">
+				<a ui-sref="app.stickers.addstickers">
+					<span class="title" translate="sidebar.nav.thirdparty.ADD">New Stickers</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.stickers.viewwindscreen">
+					<span class="title" translate="sidebar.nav.thirdparty.WS">View Windscreen</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.stickers.addwindscreen">
+					<span class="title" translate="sidebar.nav.thirdparty.ADDWS">Add Windscreen</span>
+				</a>
+			</li>
+			<li ui-sref-active="active" ng-if="role=='admin' || role=='thirdparty_admin'">
+				<a ui-sref="app.stickers.viewstickerno">
+					<span class="title" translate="sidebar.nav.thirdparty.SN">View Sticker No</span>
+				</a>
+			</li>
+			<li ui-sref-active="active" ng-if="role=='admin' || role=='thirdparty_admin'">
+				<a ui-sref="app.stickers.viewpolicyno">
+					<span class="title" translate="sidebar.nav.thirdparty.PN">View Policy No</span>
+				</a>
+			</li> 
+		</ul>
+	</li>
+	<li ng-class="{'active open':$state.includes('app.pages')}">
+		<a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.usermanegement.MAIN"> User Management </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active" ng-if="role=='admin' || role=='thirdparty_admin'">
+				<a ui-sref="app.pages.viewusers">
+					<span class="title" translate="sidebar.nav.users.VIEW">View Users</span>
+				</a>
+			</li>
+			<li ui-sref-active="active" ng-if="role=='admin' || role=='thirdparty_admin'">
+				<a ui-sref="app.pages.addusers">
+					<span class="title" translate="sidebar.nav.users.ADD">Add Users</span>
+				</a>
+			</li> 
+			<li ui-sref-active="active" ng-if="role=='admin' || role=='thirdparty_admin'">
+				<a ui-sref="app.pages.viewagents">
+					<span class="title" translate="sidebar.nav.usermanegement.AGENT"> View Agents </span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.pages.viewlogtrail">
+					<span class="title" translate="sidebar.nav.usermanegement.LOGTRAIL"> View Logtrail </span>
+				</a>
+			</li> 
+		</ul>
+	</li>
+	 
+	 
+	<li ng-class="{'active open':$state.includes('app.claims')}">
+		<a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-wheelchair"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.claims.MAIN"> Claims </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active">
+				<a ui-sref="app.claims.viewclaims">
+					<span class="title" translate="sidebar.nav.claims.VIEW">View Claim Notifications</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.claims.addclaims">
+					<span class="title" translate="sidebar.nav.claims.ADD">Add Claim Notifications</span>
+				</a>
+			</li> 
+		</ul>
+	</li>
+	<li ng-class="{'active open':$state.includes('app.reports')}" ng-if="role=='admin' || role=='thirdparty_admin'">
+		<a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-bar-chart"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.reports.MAIN"> Reports </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ng-class="{'active open':$state.includes('app.reports.dailyreports'||'app.reports.weeklyreports')}">
+				<a href="javascript:;">
+					<span translate="sidebar.nav.reports.DWM">Daily, Weekly & Monthly</span> <i class="icon-arrow"></i>
+				</a>
+				<ul class="sub-menu">
+					<li>
+						<a ui-sref="app.reports.dailyreports" translate="sidebar.nav.reports.DAILY">
+							Daily
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.reports.weeklyreports" translate="sidebar.nav.reports.WEEKLY">
+							Weekly
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.reports.monthlyreports" translate="sidebar.nav.reports.MONTHLY">
+							Monthly
+						</a>
+					</li>
+				</ul>
+			</li>
+			 
+			<li>
+				<a href="javascript:;">
+					<span translate="sidebar.nav.reports.STATUS">Status Reports</span> <i class="icon-arrow"></i>
+				</a>
+				<ul class="sub-menu">
+					<li>
+						<a ui-sref="app.reports.newstatusreports" translate="sidebar.nav.reports.NP">
+							New Policies
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.reports.paidstatusreports" translate="sidebar.nav.reports.PP">
+							Paid Policies
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.reports.expiredstatusreports" translate="sidebar.nav.reports.EP">
+							Expired Policies
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.reports.cancelledstatusreports" translate="sidebar.nav.reports.CP">
+							Cancelled Policies
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.reports.deletedstatusreports" translate="sidebar.nav.reports.DP">
+							Deleted Policies
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<span translate="sidebar.nav.reports.REVENUE">Revenue Reports</span> <i class="icon-arrow"></i>
+				</a>
+				<ul class="sub-menu">
+					<li>
+						<a ui-sref="app.reports.dailyrevenuereports" translate="sidebar.nav.reports.DAILY">
+							Daily
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.reports.monthlyrevenuereports" translate="sidebar.nav.reports.MONTHLY">
+							Monthly
+						</a>
+					</li> 
+				</ul>
+			</li> 
+			<li ui-sref-active="active">
+				<a href="#">
+					<span class="title" translate="sidebar.nav.reports.PERFORMANCE">Performance Reports</span>
+				</a>
+			</li> 
+		</ul>
+	</li> 
+	<li ng-class="{'active open':$state.includes('app.reports')}" ng-if="role=='mtn_agent' || role=='thirdparty_agent' || role=='mtn_dealer'">
+		<a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-bar-chart"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.reports.MAIN"> Reports </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active">
+				<a ui-sref="app.reports.agentreports">
+					<span class="title" translate="sidebar.nav.reports.ISSUED">Issued Policies</span>
+				</a>
+			</li>
+			 
+		</ul>
+	</li>
+</ul>
+<!-- end: MAIN NAVIGATION MENU -->
+<!-- start: CORE FEATURES -->
+<div class="navbar-title">
+	<span translate="sidebar.heading.SETTINGS">Settings</span>
+</div>
+<ul class="folders"> 
+	<li ui-sref-active="active">
+		<a ui-sref="app.settings.user">
+			<div class="item-content">
+				<div class="item-media">
+					<span class="fa-stack"> <i class="ti-view-grid"></i></span>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.accounts.SETTINGS"> Account Settings </span>
+				</div>
+			</div>
+		</a>
+	</li>
+</ul>
+<!-- end: CORE FEATURES -->
+<!-- start: DOCUMENTATION BUTTON -->
+<!-- <div class="wrapper"> -->
+	<!-- <a ui-sref="app.documentation" class="button-o"> -->
+		<!-- <i class="ti-help"></i> -->
+		<!-- <span translate="sidebar.heading.DOCUMENTATION">Documentation</span> -->
+	<!-- </a> -->
+<!-- </div> -->
+<!-- end: DOCUMENTATION BUTTON -->

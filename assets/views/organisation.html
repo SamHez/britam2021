@@ -1,0 +1,63 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.organisation.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription"></span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Company Profile</h5>
+			<p>
+				View Company Details
+			</p>
+			<div class="row" ng-controller="organisationCtrl"> 
+					<div class="panel panel-white"> 
+						<div class="panel-body">
+						<div class="table-responsive">
+							 <table data-ng-table="tableParams" show-filter="false" class="table table-bordered table-striped">
+								 <tbody>
+									<tr data-ng-repeat="d in $data">
+										<td data-title="'Action'" ng-show="role=='admin' || role=='organisation'">
+										   <div dropdown="dropdown" class="input-group-btn">
+												   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+												   </button>
+												   <ul class="dropdown-menu"> 
+													   
+													  <li><a  ng-click="editOrganisation(d.organ_id)" style="cursor:pointer">Edit</a>
+													  </li> 
+													  <li><a  ng-click="deleteOrgan(d.organ_id)" style="cursor:pointer">Delete</a>
+													  </li> 
+													  <li class="divider"></li>
+													  <li><a href="#" style="cursor:pointer">close</a>
+													  </li>
+												   </ul>
+												</div>
+										</td>
+									   <td data-title="'Code'" sortable="'code'">{{d.code}}</td>
+									   <td data-title="'Name'" sortable="'name'">{{d.name}}</td>
+									   <td data-title="'Address'" sortable="'address'">{{d.address}}</td>
+									   <td data-title="'Contact Name'" sortable="'contact_name'">{{d.contact_name}}</td>
+									   <td data-title="'Contact Email'" sortable="'contact_email'">{{d.contact_email}}</td>
+									   <td data-title="'Contact Telephone'" sortable="'contact_tel'">{{d.contact_tel}}</td>
+									   <!-- <td data-title="'Actions'" ng-show="role=='admin' || role=='organisation'"><button class="btn btn-primary" ng-click="editOrganisation(d.organ_id)">Edit</button><button class="btn btn-danger" ng-click="deleteOrgan(d.organ_id)">Delete</button></td> -->
+									</tr>
+								 </tbody>
+							  </table>
+						</div>
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

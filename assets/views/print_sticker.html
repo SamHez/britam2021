@@ -1,0 +1,149 @@
+ <html>
+<head> 
+
+</head>
+<body>
+<style media="print">   
+		
+     @media print {  
+
+          
+	@page {     
+	size: A4;
+	size: portrait; 
+    
+	} 
+		
+	 #print-content, #print-content * {
+        visibility:visible; 
+		margin-top: -10mm !important;
+		font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+		font-color:#0000;
+		font-size: 1em; 
+		font-weight: 900;
+		line-height: 1;   
+		 
+    } 
+	.name { position:absolute; top:2.1cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.policy_no { position:absolute; top:2.5cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.reg_no { position:absolute; top:3.0cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.seat { position:absolute; top:3.4cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.gross_weight { position:absolute; top:3.8cm; left:2.5cm; width:7.3cm; height:0.6cm; }
+	.chassis { position:absolute; top:4.2cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.premium { position:absolute; top:4.65cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.start_date { position:absolute; top:5.1cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.end_date { position:absolute; top:5.5cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.issuing_co { position:absolute; top:5.9cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.issuing_officer { position:absolute; top:6.3cm; left:2.5cm; width:7.3cm; height:0.6cm;}
+	.issuing_officer_signiture { position:absolute; top:6.3cm; left:7.8cm; width:1.9cm; height:0.6cm;} 
+}  
+</style>
+<div class="modal-header hidden-print">
+<a class="close" data-dismiss="alert" aria-label="close" ng-click="close()"><i class="fa fa-times"></i></a>
+<h3 class="modal-title"><i class="fa fa-print"></i> Print Sticker #{{data.invoice_detail_id}}</h3> 
+</div>
+<div class="modal-body">
+
+<form class="form-horizontal" enctype="multipart/form-data" name="pay">
+				 
+        <!-- <div class="form-group hidden-print"> -->
+          <!-- <label class="col-sm-3 control-label">Sticker Number</label> -->
+          <!-- <div class="col-sm-9"> -->
+            <!-- <select class="form-control" ng-model="data.sticker_no" required>  -->
+			<!-- <option>-select-</option> -->
+			<!-- <option ng-repeat="s in stickers" ng-show="s.status=='notused'" value="{{s.sticker_no}}">{{s.sticker_no | uppercase}}</option> -->
+			<!-- </select> -->
+            <!--                          -->
+          <!-- </div> -->
+        <!-- </div>  -->
+		 
+        <input type="hidden" class="form-control" ng-model="data.invoice_detail_id" required />
+		
+        <div class="line line-dashed b-b line-lg pull-in hidden-print"></div> 
+	
+		  
+		 <div class="form-group">
+		 <label class="col-sm-3 control-label hidden-print">print preview</label>
+		 <div class="col-sm-9"> 
+		 <table id="print-content"> 
+		 <tr>
+		 <td rowspan=3></td>
+		 <td colspan=7></td>   <!--THE REPUBLIC OF UGANDA-->
+		 </tr>
+		 <tr>
+		 <td colspan=7></td>  <!-- MOTOR TRANSIT -->
+		 </tr>
+		 <tr>
+		<td colspan=7></td>   <!--  MTP CERTIFICATE OF INSURANCE-->
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Name of Policyholder:-->
+		 <td colspan=4 class="name">{{data.client_name | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Policy No:-->
+		 <td colspan=4 class="policy_no">{{data.policy_no | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		<td colspan=4></td>  <!-- Reg. NO & MAKE:  -->
+		 <td colspan=4 class="reg_no">{{data.vehicle_plate_no | uppercase}} {{data.vehicle_make | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!--  Seating Capacity:-->
+		 <td colspan=4 class="seat">{{data.vehicle_no_seats}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>   <!-- Gross Weight:-->
+		 <td colspan=4 class="gross_weight">{{data.gross_weight}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!-- Chasis No: -->
+		 <td colspan=4 class="chassis">{{data.vehicle_chasis_no | uppercase}}</td>  
+		 </tr>
+		 <tr>
+		  <td colspan=4></td>   <!--Premium Charged:-->
+		 <td colspan=4 class="premium">{{data.total_amount | number:0}}{{data.currency}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td>  <!-- Start Date/Time: -->
+		 <td colspan=4 class="start_date">{{data.start_date}}</td>  
+		 </tr>
+		 <tr>
+		 <td colspan=4></td> <!-- End Date/Time:  -->
+		 <td colspan=4 class="end_date">{{data.end_date}}</td>  
+		 </tr>
+		 <tr>
+		  <td colspan=4></td><!--Issuing Company   -->
+		 <td colspan=4 class="issuing_co">{{data.organ_name}}</td>  
+		 </tr>
+		 <tr>
+		<td colspan=4></td>   <!-- Issuing Officer: -->
+		 <td class="issuing_officer">{{data.agent_details | uppercase  | limitTo: 10}}</td>  
+		  <!-- <td></td>  <!-- Signiture--> 
+		 <td class="issuing_officer_signiture">{{data.agent_details | lowercase | limitTo: 6}}</td>  
+		 </tr> 
+		 </table>
+		 </div>
+		 </div> 
+		<!-- {{data | json}}	 -->
+        <div class="line line-dashed b-b line-lg pull-in hidden-print"></div>
+				
+				<div class="form-group hidden-print">
+					<div class="col-sm-offset-3 col-sm-9">
+						 
+						<button class="btn btn-warning" onclick="window.print();" ng-click="update_stickerNo(data);" ng-disabled="pay.$invalid" >
+							<i class="fa fa-print"></i> Print Sticker
+						</button>
+						<!-- <button class="btn btn-primary" ng-click="update_stickerNo(data)"> -->
+							<!-- <i class="fa fa-dollar"></i> Update Sticker No -->
+						<!-- </button>  -->
+						<!-- {{data | json}} -->
+					</div>
+				</div>   
+				
+</form>
+ 
+
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.stickers.ADD">{{ mainTitle }}</h1>
+			<span class="mainDescription">Adding new sticker Nos</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="stickerNoCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Add Sticker Details</h5> 
+			<div class="row"> 
+					<div class="panel panel-white"> 
+						<div class="panel-body">
+							  
+						<form class="form-horizontal" enctype="multipart/form-data" method="post" name="registerForm"> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-3 control-label">Select Category</label>
+									  <div class="col-sm-9">
+										 <select data-ng-model="data.category" class="cs-select cs-skin-elastic" required>
+												<option value="">--Select--</option>
+												<option value="Motor Bike">Motor Bike</option>
+												<option value="Motor Transit">Motor Transit</option>
+												<option value="Motor Private">Motor Private</option>
+												<option value="Motor Commercial">Motor Commercial</option>
+										</select>
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-3 control-label">Sticker Nos Range</label>
+									  <div class="col-sm-4">
+										 <input type="text" class="form-control" ng-model="data.sticker_no_from" name="sticker_no_from" ng-pattern="/^\d+$/"  placeholder="From:" required />
+										 <span  ng-show="registerForm.sticker_no_from.$error.pattern" style="color:red">Not a valid number!</span>
+									  </div>
+									  <div class="col-sm-5">
+										 <input type="text" class="form-control" ng-model="data.sticker_no_to" name="sticker_no_to" ng-pattern="/^\d+$/"  placeholder="To:" required />
+										 <span  ng-show="registerForm.sticker_no_to.$error.pattern" style="color:red">Not a valid number!</span>
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-3 control-label">Total Amount Received</label>
+									  <div class="col-sm-9">
+										 <span class="form-control">{{(data.sticker_no_to*1 - data.sticker_no_from*1) | number:0}}</span>
+										  
+									  </div>
+								   </div> 
+								    
+								   <div class="form-group">
+									  <label class="col-sm-3 control-label"></label>
+									  <div class="col-sm-9">
+										 <button class="btn btn-primary" ng-click="add_StickerNo(data)" ng-disabled="registerForm.$invalid">Submit</button>
+									  </div>
+								   </div> 
+								  
+								 
+							 </form>
+		 <!-- {{data | json}} -->
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

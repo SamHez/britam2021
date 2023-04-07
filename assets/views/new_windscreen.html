@@ -1,0 +1,271 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.thirdparty.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">New windscreen policy</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="WindscrenController">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Add Windscreen Details</h5> 
+			<div class="row"> 
+					<div class="panel panel-white"> 
+						<div class="panel-body">
+							 
+								<form novalidate="" class="form-horizontal" name="windscreenForm">
+		    
+									<fieldset>
+									   <div class="form-group">
+										  <label for="input-id-1" class="col-sm-2 control-label">Select Currency</label>
+										  <div class="col-sm-10">
+											 <select class="form-control" ng-model="data.currency">
+											 <option>--Select--</option>
+											 <option>UGX</option>
+											 <option>USD</option>
+											 <option>KSH</option>
+											 <option>TSH</option>
+											 <option>RF</option>
+											 <option>FBu</option> 
+											 </select>
+										  </div>
+									   </div>
+									   
+									</fieldset> 
+									 
+									<fieldset>
+									 <h6><u>Motor details</u></h6>
+									 
+									 <button class="btn btn-primary" ng-click="addNewChoice()">Add +</button>
+									 <button class="btn btn-danger" ng-click="removeChoice();" >Remove -</button><br/>
+									 <table class="table table-bordered">
+									 <tr>
+										<th></th>
+										<th></th> 
+									 </tr>
+									 <tbody> 
+									 <tr ng-repeat="motor_detail in motor_details track by $index">
+										<td width="50%" ng-init="$parent.total_p = (($index + 1))">Insure Windscreen #{{$index + 1}} 
+										<br/><label>Select Policy No:</label>
+										
+									<select class="form-control" ng-model="motor_detail.policy_no" required> 
+										<option>-select-</option>
+										<option ng-repeat="a in policies_no" value="{{a.policy_no}}" ng-show="a.status=='notused'">{{a.policy_no}}</option>
+									</select> 
+										<br/><label>Vehicle Regidtration No :</label><input type="text" class="form-control"  ng-model="motor_detail.vehicle_registration_no" required/>
+										<br/><label>Vehicle Chassis No</label> <input type="text" class="form-control"  ng-model="motor_detail.vehicle_chasis_no" required/>
+										</td>
+										<td width="50%"> 
+										<label>Windscreen Valuation: </label> <input type="text" class="form-control"  ng-model="motor_detail.windscreen_valuation" ng-change="motor_detail.basic_premium=((motor_detail.windscreen_valuation*0.1)+((motor_detail.windscreen_valuation*0.1)*0.18));motor_detail.total_levy = ((0.5/100)*motor_detail.windscreen_valuation)" required/>
+										 
+										 <br/><label>Vehicle Make</label>
+											<select class="form-control"  ng-model="motor_detail.vehicle_make">
+											 <option value="">-select-</option>
+											 <option value="Toyota">Toyota</option>
+											 <option value="Mercedez Benz">Mercedez Benz</option>
+											 <option value="Nissan">Nissan</option>
+											 <option value="GMC">GMC</option>
+											 <option value="BMW">BMW</option>
+											 <option value="Isuzu">Isuzu</option>
+											 <option value="Others">Others</option>
+											 </select>
+										<br/> 
+										<label>Basic Premium</label> 
+										<span ng-if="motor_detail.windscreen_valuation.length >0">
+										<input type="hidden" ng-model="motor_detail.basic_premium" ng-init="motor_detail.basic_premium=((motor_detail.windscreen_valuation*0.1)+((motor_detail.windscreen_valuation*0.1)*0.18))" />
+										{{motor_detail.windscreen_valuation * 0.1 | number:0}} {{data.currency}}</span>
+									 <br/>
+									  </td>
+									 </tr>
+								 
+									<!-- {{motor_details | json}} -->
+									 </tbody>
+									 <tfoot>
+										<td>Total valuation for Windscreen Inclusive of VAT</td>
+										<td><strong>{{total_valuation | number:0}} {{data.currency}}</strong></td>
+									 </tfoot>
+									 </table>
+									 <br/>
+									 <!-- {{motor_details | json}} -->
+									 <button class="btn btn-primary" ng-click="getTotal();data.total_levy = ((0.5/(total_p+'00'))*total_valuation);data.total_stampduty = ((35000*total_p));">Generate Total Premium</button>
+										 
+									</fieldset>
+									 
+									<!-- {{data | json}} -->
+									 <fieldset>
+									 <h6><u>Policy period</u></h6>
+									   <div class="form-group" ng-controller="DatepickerDemoCtrl">
+										  <label class="col-sm-2 control-label">Start Date</label>
+										  <div class="col-sm-10 col-lg-4">
+										   <input type="text" class="form-control" ng-click="endOpen = !endOpen" datepicker-popup="fullDate" ng-model="data.start_date" is-open="endOpen" ng-init="endOpen = false" min-date="data.start_date" close-text="Close" required />
+											<span ng-show="data.start_date < today" style="color:red">Date must be current date and above</span>
+										   <!-- {{today}} -->
+											
+										  </div>
+									   </div>
+									   <!-- <div class="form-group"> -->
+										  <!-- <label class="col-sm-2 control-label">End Date</label> -->
+										  <!-- <div class="col-sm-10"> -->
+										   <!-- <ng-datepicker format="DD-MM-YYYY" view-format="DD-MM-YYYY" ng-model="data.end_date"></ng-datepicker> -->
+											 
+										  <!-- </div> -->
+									   <!-- </div> -->
+									</fieldset>
+									
+									
+									 
+									
+									<fieldset>
+									 <h6><u>Client details</u></h6>
+									 
+									 <fieldset>
+									   <div class="form-group">
+										  <!-- <label class="col-sm-3 control-label">Select Client</label> -->
+										  <div class="col-sm-12">  
+											 <div class="clip-radio radio-primary">
+												<input type="radio" id="new" name="n_client" ng-model="data.n_client" value="new">
+												<label for="new">
+													New Client
+												</label>
+												<input type="radio" id="old" name="n_client" ng-model="data.n_client" value="old">
+												<label for="old">
+													Existing Client
+												</label> 
+											</div>	 
+										  </div>
+									   </div>
+									</fieldset>
+									
+										   <div class="form-group" ng-show="data.n_client=='old'">
+											  <label class="col-sm-2 control-label">Select Client</label>
+											  <div class="col-sm-10">
+												 <select type="text" class="form-control" ng-model="data.client" ng-options="c.name for c in clients track by c.client_id">
+												 <option>--Select--</option>
+												 </select>
+											  </div>
+										   </div>
+										   
+										<div ng-show="data.n_client=='new'">
+										   
+										  <div class="form-group">
+										  <label for="input-id-1" class="col-sm-2 control-label">Client Name</label>
+										  <div class="col-sm-10">
+											 <input type="text" class="form-control" ng-model="data.client_name" name="client_name"/> 
+										  </div>
+										  </div>
+										  
+										   <div class="form-group" ng-controller="DatepickerDemoCtrl">
+											  <label class="col-sm-2 control-label">Date of birth</label>
+											  <div class="col-sm-10 col-lg-4">
+												 <input type="text" class="form-control" ng-click="endOpen = !endOpen" name="dob" datepicker-popup="fullDate" ng-model="data.dob" min-date="data.dob" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+											  </div>
+										   </div> 
+										  
+										  <div class="form-group">
+										  <label for="input-id-1" class="col-sm-2 control-label">Gender</label>
+										  <div class="col-sm-10">
+											 <div class="clip-radio radio-primary">
+												<input type="radio" id="Male" name="gender" ng-model="data.gender" value="Male">
+												<label for="Male">
+													Male
+												</label>
+												<input type="radio" id="Female" name="gender" ng-model="data.Female" value="Female">
+												<label for="Female">
+													Female
+												</label> 
+											</div>
+										  </div>
+									   </div>
+										  
+										  <div class="form-group">
+										  <label for="input-id-1" class="col-sm-2 control-label">Email Address</label>
+										  <div class="col-sm-10">
+											 <input type="text" class="form-control" ng-model="data.client_email" name="client_email"/>
+											  
+										  </div>
+										  </div>
+									   
+									   <div class="form-group">
+										  <label for="input-id-1" class="col-sm-2 control-label">Telephone</label>
+										  <div class="col-sm-10">
+											 <input type="text" class="form-control" ng-model="data.client_telephone" name="client_telephone"/>
+											  
+										  </div>
+									   </div>
+									   
+									   <div class="form-group">
+										  <label class="col-sm-2 control-label">Address</label>
+										  <div class="col-sm-10">
+											 <textarea rows="10" class="form-control"  ng-model="data.client_address" name="client_address"> 
+											 </textarea>
+										  </div>
+									   </div>
+										   
+										</div>
+									   
+									</fieldset>
+									
+									 
+									<fieldset>
+									 <span style="color:red;">Total windscreen premium changed: {{(total_valuation*1)+(data.total_stampduty*1)+(data.total_levy*1) | number:0}} {{data.currency}}</span>
+									 </fieldset>
+
+									<fieldset>	
+									 <div class="form-group">
+								  <label class="col-sm-3 control-label">Select Payments</label>
+								  <div class="col-sm-9">
+									<div class="btn-group m-r">
+									  <label class="btn btn-default" ng-model="data.payment_mode" btn-radio="'cash'"><img src="assets/images/cash.jpg" height="30" width="30" />Cash</label>
+									  <label class="btn btn-default" ng-model="data.payment_mode" btn-radio="'bank'"><img src="assets/images/bank.jpg" height="30" width="30" />Bank</label>
+									  <label class="btn btn-default" ng-model="data.payment_mode" btn-radio="'mtnmobile'" ><img src="assets/images/mtn.jpg" height="30" width="30" />MTN Mobile Money</label> 
+									  <label class="btn btn-default" ng-model="data.payment_mode" btn-radio="'airtelmobile'" ><img src="assets/images/airtel.jpg" height="30" width="30" />Airtel Mobile Money</label> 
+									  
+									  <input type="text" placeholder="Enter receipt no" class="form-control" ng-model="data.payment_ref" ng-show="data.payment_mode=='cash' || data.payment_mode=='bank'" />
+									  <input type="text" placeholder="Enter mobile no eg 256752000111 or 256782000111" class="form-control" ng-model="user_telephone" ng-show="data.payment_mode=='mtnmobile' || data.payment_mode=='airtelmobile'" />
+									  <button class="btn btn-primary" ng-show="data.payment_mode=='mtnmobile' || data.payment_mode=='airtelmobile'" ng-click="initiatePay(user_telephone,data.total_amount,data.invoice_id)">Initiate Payment</button>
+									</div>
+									
+								  </div>
+								</div> 
+								</fieldset>
+									 <!-- <fieldset> -->
+									  <!-- <span style="color:red;">Training Levy 0.5 % : {{data.total_levy | number:0}} {{data.currency}}</span> -->
+									<!-- </fieldset>  -->
+									  <!-- <fieldset> -->
+									  <!-- <span style="color:red;">Stamp Duty : {{data.total_stampduty | number:0}} {{data.currency}}</span> -->
+									<!-- </fieldset>  -->
+									 
+									   <div class="form-group" ng-show="data.start_date > today && role=='thirdparty_agent'">
+										  <label class="col-sm-3 control-label">Submit for invoice</label>
+										  <div class="col-sm-9">
+											 <button class="btn btn-primary" ng-click="getInvoice(data)" ng-disabled="isRefreshing">Process Windscreen Insurance</button>
+										  </div>
+									   </div>
+									   
+									   <div class="form-group" ng-show="(role=='thirdparty_admin' || role=='admin)">
+										  <label class="col-sm-3 control-label">Submit for invoice</label>
+										  <div class="col-sm-9">
+											 <button class="btn btn-primary" ng-click="getInvoice(data)" ng-disabled="windscreenForm.$invalid">Process Windscreen Insurance</button>
+										  </div>
+									   </div>
+									</fieldset>
+									 
+									  
+									 
+								 </form>
+							    
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

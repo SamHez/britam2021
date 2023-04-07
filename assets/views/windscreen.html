@@ -1,0 +1,78 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.thirdparty.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">Managing Windscreen Policies</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="WindscrenController">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Windscreen Policy Lists</h5> 
+			<div class="row"> 
+					<div class="panel panel-white">
+						<br/>
+						 <div class="form-group"> 
+							<div class="col-sm-8"><input type="text" class="form-control" ng-model="search" name="search" placeholder="Search windscreen policies..."/></div>
+						 
+						</div>
+						<br/>
+						<div class="panel-body">
+						<div class="table-responsive">
+							 <table data-ng-table="tableParams" show-filter="false" class="table table-bordered table-striped">
+								 <tbody>
+									<tr data-ng-repeat="q in $data | filter: search">
+									  <td data-title="'Action'">
+									   <div dropdown="dropdown" class="input-group-btn">
+											   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+											   </button>
+											   <ul class="dropdown-menu"> 
+												  <li><a ui-sref="" style="cursor:pointer">Details</a>
+												  </li> 
+												  <li><a ui-sref="" style="cursor:pointer">Renew</a>
+												  </li>  
+												  <li><a ng-click="cancelWindscreen(q.windscreen_id)" style="cursor:pointer">Cancel</a>
+												  </li>
+												  <li><a ng-click="deleteWindscreen(q.windscreen_id)" style="cursor:pointer">Delete</a>
+												  </li>
+												  <li class="divider"></li>
+												  <li><a href="#" style="cursor:pointer">close</a>
+												  </li>
+											   </ul>
+											</div>
+										</td>
+                  
+									  <td data-title="'Client'" sortable="'client_name'"> {{q.client_name}}</td>
+									  <td data-title="'Policy No'" sortable="'policy_no'"> {{q.policy_no}}</td>
+									  <td data-title="'Vehicle Registration'" sortable="'vehicle_registration_no'">{{q.vehicle_registration_no}}</td>
+									  <td data-title="'Vehicle Make'" sortable="'vehicle_make'">{{q.vehicle_make}}</td>
+									  <td data-title="'Total Premium'"  class="text-danger text-bold">{{(q.premium_charged*1)+(((q.premium_charged*1)+(q.training_levy*1)+(q.stamp_duty*1))*0.18)+(q.training_levy*1)+ (q.stamp_duty*1) | number:0}} {{q.currency}}</td>
+									  
+									  <td data-title="'Payment Method'" sortable="'payment_mode'">{{q.payment_mode}}</td>
+									  <td data-title="'Currency'" sortable="'currency'">{{q.currency}}</td>
+									  <td data-title="'Agent'" sortable="'agent_details'">{{q.agent_details}}</td>
+									  <td data-title="'Status'" sortable="'status'"> 
+									  <label class="label label-warning" ng-show="q.status=='cancelled'">Cancelled</label> 
+									  <label class="label label-danger" ng-show="q.status=='notpaid'">Not Paid</label> 
+									  <label class="label label-success" ng-show="q.status=='paid'">Paid</label>
+									  </td>
+									  <td data-title="'Created At'">{{q.t}}</td>
+								   </tr>
+								 </tbody>
+							  </table>
+						</div>
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

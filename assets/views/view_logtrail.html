@@ -1,0 +1,59 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.users.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">User Log Trail</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="LogController">
+	<div class="row">
+		<div class="col-md-12">
+ <fieldset>
+ 
+			   <div class="col-md-8">
+               <div class="form-group">
+                  <label class="col-sm-1 control-label">Search</label>
+                  <div class="col-sm-11">
+                     <input type="text" class="form-control form-control-rounded" placeholder="Search...." ng-model="search"/>
+                  </div>
+               </div>
+               </div>
+			   
+			    
+       </fieldset>			 
+			<div class="row"> 
+					<div class="panel panel-white"> 
+						<div class="panel-body">
+				<div class="table-responsive">
+						   <table data-ng-table="tableParams" class="table table-bordered table-striped">
+									<tbody>
+									   <tr data-ng-repeat="q in $data | filter: search">
+										  
+										  <td data-title="''"> <img src="{{q.avatar}}" height="50px" width="50px" /></td>
+										  <td data-title="'License No'" sortable="'license_no'"> {{q.license_no}}</td> 
+										  <td data-title="'Name'" sortable="'name'"> {{q.name}}</td>
+										  <td data-title="'Gender'" sortable="'gender'">{{q.gender}}</td>
+										  <td data-title="'Telephone'" sortable="'telephone'">{{q.telephone}}</td>
+										  <td data-title="'Email'" sortable="'email'">{{q.email}}</td> 
+										  <td data-title="'Event Log'"  class="text-danger text-bold" sortable="'event'">{{q.event}}</td> 
+										  <td data-title="'Created At'" sortable="'time'">{{q.time}}</td>
+										   
+									   </tr>
+									</tbody>
+							</table>
+   						</div>
+   						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

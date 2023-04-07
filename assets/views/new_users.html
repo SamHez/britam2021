@@ -1,0 +1,140 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.users.ADD">{{ mainTitle }}</h1>
+			<span class="mainDescription">Adding new Users</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="UserCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Add User Details</h5> 
+			<div class="row"> 
+					<div class="panel panel-white"> 
+						<div class="panel-body">
+							  
+						<form class="form-horizontal" enctype="multipart/form-data" method="post"> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-2 control-label">Name</label>
+									  <div class="col-sm-10">
+										 <input type="text" class="form-control" ng-model="data.name" name="name"/>
+										  
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-2 control-label">License No</label>
+									  <div class="col-sm-10">
+										 <input type="text" class="form-control" ng-model="data.license_no" name="license_no"/>
+										  
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-2 control-label">Email Address</label>
+									  <div class="col-sm-10">
+										 <input type="text" class="form-control" ng-model="data.email" name="email"/>
+										  
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-2 control-label">Telephone</label>
+									  <div class="col-sm-10">
+										 <input type="text" class="form-control" ng-model="data.telephone" name="telephone"/>
+										  
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-2 control-label">National ID No</label>
+									  <div class="col-sm-10">
+										 <input type="text" class="form-control" ng-model="data.NIN" name="NIN"/>
+										  
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label for="input-id-1" class="col-sm-2 control-label">Gender</label>
+									  <div class="col-sm-10">
+											 <div class="btn-group m-r">
+											  <label class="btn btn-default" ng-model="data.gender" btn-radio="'male'" >Male</label>
+											  <label class="btn btn-default" ng-model="data.gender" btn-radio="'female'" >Female</label> 
+											  <!-- {{data | json}} -->
+											</div>
+										  
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label class="col-sm-2 control-label">Branch Name</label>
+									  <div class="col-sm-10 col-lg-4">
+										 <input type="text" class="form-control" ng-model="data.branch_name" name="branch_name"/>
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label class="col-sm-2 control-label">Date of birth</label>
+									  <div class="col-sm-10 col-lg-4" ng-controller="DatepickerDemoCtrl">
+										 <input type="text" class="form-control" ng-click="endOpen = !endOpen" name="dob" datepicker-popup="" ng-model="data.dob" min-date="data.dob" is-open="endOpen" ng-init="endOpen = false" close-text="Close" />
+										</div>
+								   </div> 
+								   <div class="form-group">
+									  <label class="col-sm-2 control-label">User Access Roles</label>
+									  <div class="col-sm-10 col-lg-4"> 
+										 <select data-ng-model="data.role" class="cs-select cs-skin-elastic">
+												  <option value="">--Select User Role--</option>
+												  <option ng-show="role=='admin'" value="admin">Super Admin</option>
+												  <!-- <option ng-show="role=='admin'"  value="organisation">Organisation Admin</option> -->
+												  <!-- <option ng-show="role=='admin' || role=='organisation'"  value="organ_agent">Organisation Agent</option> -->
+												  <!-- <option ng-show="role=='admin'"  value="super_agent">Super Agent</option> -->
+												  <option  ng-show="role=='admin'"  value="thirdparty_admin">MTP Supervisor</option>
+												  <option ng-show="role=='admin' || role=='thirdparty_admin' "  value="thirdparty_agent">MTP Agents</option>
+												  <option ng-show="role=='admin' || role=='thirdparty_admin' || role=='mtn_dealer' "  value="mtn_dealer">MTN dealer agents</option>
+												  <option ng-show="role=='admin' || role=='thirdparty_admin' || role=='mtn_dealer' "  value="mtn_agent">MTN Agent</option>
+											</select>
+											   
+									  </div>
+								   </div> 
+								   <div class="form-group">
+									  <label class="col-sm-2 control-label">Address</label>
+									  <div class="col-sm-10">
+										 <textarea rows="10" class="form-control"  ng-model="data.address" name="address"> 
+										 </textarea>
+									  </div>
+								   </div> 
+								   
+								   <div class="form-group">
+									  <label class="col-sm-2 control-label">Upload Profile Photo</label>
+									  <div class="col-sm-10">
+										 <input type="file" class="form-control" name="file" file-model="myFile" /> 
+									  </div>
+								   </div> 
+								<!-- <fieldset>  -->
+								   <!-- <div class="form-group"> -->
+									  <!-- <label class="col-sm-2 control-label">Password</label> -->
+									  <!-- <div class="col-sm-10"> -->
+										 <!-- <input type="password" class="form-control" name="password" ng-model="data.password" />  -->
+									  <!-- </div> -->
+								   <!-- </div> -->
+								<!-- </fieldset> -->
+								<!-- {{data | json}} -->
+								   
+								   <div class="form-group">
+									  <label class="col-sm-2 control-label"></label>
+									  <div class="col-sm-10">
+										 <button class="btn btn-primary" ng-click="add_Users(data)">Submit</button>
+									  </div>
+								   </div> 
+								  
+								 
+							 </form>
+		 <!-- {{data | json}} -->
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    

@@ -1,0 +1,103 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.clients.MAIN">{{ mainTitle }}</h1>
+			<span class="mainDescription">Managing Clients</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: BASIC EXAMPLE -->
+<div class="container-fluid container-fullw bg-white" ng-controller="clientCtrl">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Client Lists</h5>
+			<p>
+				View Client Details
+			</p>
+			<div class="row"> 
+					<div class="panel panel-white">
+						<br/>
+						 <div class="form-group">  
+							<div class="col-sm-8"><input type="text" class="form-control" ng-model="search" name="search" placeholder="Search clients..."/></div>
+							<div class="col-sm-4">
+								<div class="btn-group" dropdown>
+									<button type="button" class="btn btn-primary">
+										<i class="ti-download"></i> Export Report
+									</button>
+									<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+										<span class="caret"></span>
+										<span class="sr-only">Split button!</span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<!-- <li> -->
+											<!-- <a ng-click="exportAction('pdf')"> -->
+												<!-- PDF -->
+											<!-- </a> -->
+										<!-- </li> -->
+										<li>
+											<a ng-click="exportAction('doc')">
+												DOC
+											</a>
+										</li>
+										<li>
+											<a ng-click="exportAction('csv')">
+												CSV
+											</a>
+										</li> 
+										<li>
+											<a ng-click="exportAction('excel')">
+												Excel
+											</a>
+										</li>
+									</ul>
+								</div>
+							   </div> 
+						</div> 
+							  <!-- <h5 class="text-bold margin-top-25 margin-bottom-15">.</h5> -->
+							 
+						<br/>
+						<div class="panel-body">
+						<div class="table-responsive">
+							 <table data-ng-table="tableParams" show-filter="false" class="table table-bordered table-striped export-table">
+								 <tbody>
+									<tr data-ng-repeat="d in $data | filter:search">
+									<td data-title="'Action'">
+										   <div dropdown="dropdown" class="input-group-btn">
+												   <button type="button" dropdown-toggle="" class="btn btn-default dropdown-toggle"><i class="fa fa-bars"></i>
+												   </button>
+												   <ul class="dropdown-menu"> 
+													   
+													  <li><a  ng-click="editClient(d.client_id)" style="cursor:pointer">Edit</a>
+													  </li> 
+													  <li ng-if="role=='admin' || role=='thirdparty_admin' || role=='mtn_dealer'"><a  ng-click="deleteClient(d.client_id)" style="cursor:pointer">Delete</a>
+													  </li> 
+													  <li class="divider"></li>
+													  <li><a href="#" style="cursor:pointer">close</a>
+													  </li>
+												   </ul>
+												</div>
+										</td>
+									   <td class="rowTd"  data-title="'#'" >{{$index+1}}</td> 
+									   <td class="rowTd"  data-title="'Name'"  sortable="'name'">{{d.name}}</td>
+									   <td class="rowTd"  data-title="'Gender'" sortable="'gender'" >{{d.gender}}</td> 
+									   <td class="rowTd"  data-title="'Email'" sortable="'email'" >{{d.email}}</td> 
+									   <td class="rowTd"  data-title="'Contact'" sortable="'telephone'">{{d.telephone}}</td> 
+									   <td  class="rowTd" data-title="'Address'" sortable="'address'">{{d.address}}</td>
+									   <!-- <td data-title="'Actions'"><button class="btn btn-primary" ng-click="editClient(d.client_id)">Edit</button><button class="btn btn-danger" ng-click="deleteClient(d.client_id)">Delete</button></td> -->
+									</tr>
+								 </tbody>
+							  </table>
+						</div>
+						</div>
+					</div>
+				 
+				 
+				 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: BASIC EXAMPLE -->    
